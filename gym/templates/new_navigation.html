@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gym site</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/7f59fdaec5.js" crossorigin="anonymous"></script>
+    <script src="{% static 'scripts/script.js' %}" defer></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+</head>
+
+<body>
+<header>
+    <nav class="navbar">
+        <div class="brand-name"><a href="{% url 'index' %}">Pro<span>Athlete</span>Corner</a></div>
+        <a href="#" class="toggle-button active">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </a>
+        <div class="navbar-links" id="navigation">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li><a href="#" class="navbar-btn">Coaches</a></li>
+                    <li><a href="#" class="navbar-btn">Camps</a></li>
+                    <li><a href="#" class="navbar-btn">Workouts</a></li>
+                    <li><a href="#" class="navbar-btn">Recipes</a></li>
+                    <li><a href="#" class="navbar-btn">Profile</a></li>
+                    <li><a href="{% url 'logout' %}" class="navbar-btn">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'register' %}" class="navbar-btn">Register</a></li>
+
+                {% endif %}
+
+            </ul>
+        </div>
+    </nav>
+</header>
+
+
+<main>
+
+    {% block content %}
+
+    {% endblock %}
+
+</main>
+
+
+<footer>
+    <section id="social">
+        <div class="contacts">
+            <ul>
+                <li class="fa-icon">
+                    <i class="fa fa-facebook-square" aria-hidden="true"></i>
+                </li>
+                <li class="fa-icon">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                </li>
+                <li class="fa-icon">
+                    <i class="fa fa-twitter-square" aria-hidden="true"></i>
+                </li>
+                <li class="fa-icon">
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <div id="info"><h1>Work time</h1></div>
+    <div id="links">
+        <div class="footer-links">
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Coaches</a></li>
+                <li><a href="#">Workouts</a></li>
+                <li><a href="#">Camps</a></li>
+                <li><a href="#">Recipes</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="map"><img src="https://www.w3schools.com/w3images/map.jpg" alt="map"></div>
+    <div id="bottom"><p>&copy; Copyright 2022 ProAthleteCorner Team. All rights reserved.</p></div>
+</footer>
+</body>
+</html>

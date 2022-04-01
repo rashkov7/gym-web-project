@@ -21,3 +21,8 @@ class GymUser(AbstractBaseUser, PermissionsMixin):
         verbose_name = "user"
         verbose_name_plural = "users"
         swappable = "AUTH_USER_MODEL"
+
+
+class LoginFormModel(models.Model):
+    email = models.EmailField()
+    password =models.CharField(max_length=50)

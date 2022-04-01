@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'gym.auth_app',
     'gym.profile_app',
+    'gym.main_app',
 ]
 
 MIDDLEWARE = [
