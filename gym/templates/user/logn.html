@@ -1,0 +1,26 @@
+{% extends 'new_navigation.html' %}
+{% load static %}
+
+{% block content %}
+
+    <section class="wallpaper">
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <h1> LogIn Corner</h1>
+
+            <div class="input-group">
+                <input type="text" name="username" id="id_username" required>
+                <label for="id_username"><i class="fa-solid fa-envelope"></i> Enter your email</label>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" autocomplete="current-password" required id="id_password">
+                <label for="id_password"><i class="fa-solid fa-lock"></i> Enter your password</label>
+            </div>
+
+            <h4>{{ form.errors }}</h4>
+            <input type="submit" class="button-register" title="Submit">
+
+        </form>
+    </section>
+
+{% endblock %}

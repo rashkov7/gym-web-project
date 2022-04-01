@@ -1,0 +1,73 @@
+{% extends 'new_navigation.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h1><i>Are you ready for a<span> BOOT</span> CAMP ?</i></h1>
+
+    <div>
+        <div class="box-card">
+            <div class="card-img">
+                <img src="{% static 'images/form-wallpaper.jpg' %}" alt="dfdsf">
+            </div>
+            <div class="card-text">
+                <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.
+                    Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in
+                    their exact original form, accompanied by English versions from the 1914 translation by H.
+                    Rackham.
+                </p>
+                {% if true %}
+                    <button class="button-register" style="background-color: #3f51b5;">Edit Camp</button>
+                {% endif %}
+            </div>
+
+            <div class="card-footer">
+                <div class="card-joined border">
+                    <a href="#">
+                        <div class="value"><i class="fa-solid fa-people-group"></i> 14</div>
+                        <div class="type">joined</div>
+                    </a>
+                </div>
+
+                <div class="card-joined"><a href="#">
+                    <div class="value"><i class="fa-solid fa-door-open"></i></div>
+                    <div class="type">Join</div>
+                </a>
+
+                </div>
+            </div>
+        </div>
+        <div class="box-card">
+            <div class="card-img">
+                <img src="{% static 'images/picture.jpg' %}" alt="dfdsf">
+            </div>
+            <div class="card-text">
+                <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.
+                    Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in
+                    their exact original form, accompanied by English versions from the 1914 translation by H.
+                    Rackham.
+                </p>
+                {% if true %}
+                    <button class="button-register" style="background-color: #3f51b5;">Edit Camp</button>
+                {% endif %}
+            </div>
+
+            <div class="card-footer">
+                <div class="card-joined border">
+                    <a href="#">
+                        <div class="value"><i class="fa-solid fa-people-group"></i> 10</div>
+                        <div class="type">joined</div>
+                    </a>
+                </div>
+
+                <div class="card-joined"><a href="#">
+                    <div class="value"><i class="fa-solid fa-door-open"></i></div>
+                    <div class="type">Join</div>
+                </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

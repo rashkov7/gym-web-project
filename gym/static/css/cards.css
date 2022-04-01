@@ -1,0 +1,178 @@
+
+span {
+    color: red;
+}
+
+.box-card {
+    align-items: center;
+    justify-content: center;
+    display: inline-grid;
+    grid-template-columns: 300px;
+    grid-template-rows: 20px 200px 250px 50px;
+    grid-template-areas: 'published' 'image' 'text' 'stats';
+    border-radius: 20px;
+    box-shadow: 5px 10px 15px rgba(19, 18, 18, 0.96);
+    text-align: center;
+    margin: 20px 40px;
+    transition: 0.5s ease;
+}
+
+.view-card.box-card:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    box-shadow: 5px 5px 15px rgba(255, 255, 255, 0.9);
+}
+
+.box-card.view-card > a {
+    text-decoration-line: none;
+}
+
+.card-published {
+    color: white;
+    font-size: 10px;
+}
+
+.card-img {
+
+    grid-area: image;
+    margin: 0;
+    padding: 0;
+    width: 300px;
+    height: 200px;
+    border-radius: 15px;
+}
+
+.card-img img {
+    height: 200px;
+    width: 300px;
+    border-radius: 15px;
+}
+
+.card-text {
+    /*background-color: white;*/
+    /*opacity: 0.5;*/
+    /*color: black;*/
+    grid-area: text;
+    margin: 10px;
+}
+
+.card-text p {
+    color: white;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.card-footer {
+    grid-area: stats;
+    display: grid;
+    grid-template-columns: 150px 150px;
+    grid-template-rows: 50px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: #f44336;
+}
+
+.card-footer .type {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0;
+    color: white;
+}
+
+.card-footer .value {
+    margin: 4px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.card-footer .type {
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.card-footer .border {
+    border-right: 1px solid silver;
+}
+
+.card-footer a {
+    cursor: pointer;
+    text-decoration-line: none;
+    color: black;
+}
+
+.card-joined:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(255, 255, 255, 255);
+}
+
+.card-footer a:hover {
+    color: white;
+
+}
+.profile-card h1 {
+    text-align: center;
+    padding-top: 80px;
+    font-size: 40px;
+    color: #ECECEC;
+}
+
+
+.profile-card {
+    align-items: center;
+    justify-content: center;
+    display: grid;
+    padding-top: 10px;
+    grid-template-columns: 600px 350px;
+    grid-template-rows: 30px 400px 30px;
+    grid-template-areas: 'title title' 'cv img' 'slider slider';
+
+
+    /*background: #f44336;*/
+    /*height: 100vh;*/
+    /*width: 100%;*/
+    /*position: relative;*/
+}
+
+.title {
+    grid-area: title;
+    text-align: center;
+    position: sticky;
+}
+
+.title h1 {
+
+}
+
+.cv {
+    grid-area: cv;
+    text-align: center;
+    background: red;
+    margin-right: -50px;
+    position: relative;
+    padding:20px;
+    border-radius: 20px;
+    /*transform: translateY(20%);*/
+}
+
+.profile-img {
+    grid-area: img;
+    text-align: center;
+}
+
+.profile-img img {
+    width: 350px;
+    border-radius: 50px;
+}
+
+.slider {
+    grid-area: slider;
+    text-align: center;
+}
+.slider a {
+    text-decoration-line: none;
+    text-decoration-color: #ECECEC;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
