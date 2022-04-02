@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from gym.auth_app.models import GymUser
+
+
+@admin.register(GymUser)
+class AdminGymUser(admin.ModelAdmin):
+    pass

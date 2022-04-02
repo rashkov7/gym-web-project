@@ -5,7 +5,7 @@
 
     <h1><i>Push through the pain <span>EVERY</span> single day?</i></h1>
     <section class="about">
-        <h2>ABOUT US</h2>
+        <h2>{{ is_true }}</h2>
         <div id="quote">
             <i class="fa-solid fa-quote-right"></i>
             <p>“The human body has been designed to resist an infinite number of changes and attacks brought about by
@@ -13,6 +13,9 @@
                 body.” – Harry J. Johnson</p>
             <br><br>
             {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                    <a href="#" class="button-register" style="width: 40px">Update Site</a>
+                {% endif %}
                 <a href="#" class="button-register" style="width: 40px">Profile Page</a>
 
             {% else %}

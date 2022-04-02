@@ -1,7 +1,8 @@
 from django import forms
 
-from auth_app.validators import valid_passwords_are_equals
-from gym.auth_app.models import GymUser, LoginFormModel
+from gym.auth_app.validators import valid_passwords_are_equals
+from gym.auth_app.models import GymUser
+from gym.profile_app.models import ProfileModel
 
 
 class CreateUserForm(forms.ModelForm):
@@ -23,15 +24,5 @@ class CreateUserForm(forms.ModelForm):
         user.set_password(self.cleaned_data.get('password1'))
         if commit:
             user.save()
+        ProfileModel.objects.create(first_name='Anonymous', user=user)
         return user
-
-
-class LoginForm(forms.ModelForm):
-    class Meta:
-        model = LoginFormModel
-        fields = ('email', 'password')
-
-    def save(self, commit=True):
-        super().save(commit=False)
-        a=5
-        c=5
