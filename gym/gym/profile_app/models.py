@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 
 from gym.auth_app.models import GymUser
@@ -25,3 +27,9 @@ class ProfileModel(models.Model):
     @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
+
+    @property
+    def age(self):
+        if self.birth_date:
+            return datetime.now() - self.birth_date
+        return 'Dont show'

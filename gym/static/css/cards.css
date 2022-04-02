@@ -126,12 +126,9 @@ span {
     grid-template-columns: 600px 350px;
     grid-template-rows: 30px 400px 30px;
     grid-template-areas: 'title title' 'cv img' 'slider slider';
-
-
-    /*background: #f44336;*/
     /*height: 100vh;*/
     /*width: 100%;*/
-    /*position: relative;*/
+    position: relative;
 }
 
 .title {
@@ -146,12 +143,14 @@ span {
 
 .cv {
     grid-area: cv;
-    text-align: center;
+    text-align: left;
     background: red;
     margin-right: -50px;
     position: relative;
     padding:20px;
     border-radius: 20px;
+    background: rgba(0,0,0,0.5);
+    color: #ECECEC;
     /*transform: translateY(20%);*/
 }
 

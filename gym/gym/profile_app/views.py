@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
 
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, ListView, DetailView
 
 from gym.profile_app.forms import ProfileForm
 from gym.profile_app.models import ProfileModel
@@ -23,3 +23,8 @@ class UpdateProfileView(UpdateView):
             self.request.user.save()
         self.object = form.save(commit=True)
         return super().form_valid(form)
+
+
+class ProfilePageView(DetailView):
+    template_name = 'profile/profile_details.html'
+    model = ProfileModel

@@ -30,7 +30,7 @@
                     <li><a href="#" class="navbar-btn">Camps</a></li>
                     <li><a href="#" class="navbar-btn">Workouts</a></li>
                     <li><a href="#" class="navbar-btn">Recipes</a></li>
-                    <li><a href="#" class="navbar-btn">Profile</a></li>
+                    <li><a href="{% url 'profile page' user.id %}" class="navbar-btn">Profile</a></li>
                     <li><a href="{% url 'logout' %}" class="navbar-btn">Logout</a></li>
                 {% else %}
                     <li><a href="{% url 'register' %}" class="navbar-btn">Register</a></li>

@@ -12,9 +12,6 @@ class ProfileForm(forms.ModelForm):
                 field.widget = forms.HiddenInput()
                 field.required = False
 
-
     class Meta:
         model = ProfileModel
         fields = '__all__'
-        # exclude = ('user',)
-

@@ -3,28 +3,41 @@
 
 {% block content %}
 
-    <h1><i>Profile</i></h1>
+    <h1><i>Profile Page</i></h1>
     <div class="profile-card">
         <div class="title">
-            <h1>Name</h1>
+            <h1>{{ object.full_name }}</h1>
         </div>
         <div class="cv">
-            <h3>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem
-                Ipsum.
-            </h3>
+            <h4>
+                <h3>
+                    Age: {{ profilemodel.age }}
+                </h3>
+                <h3>
+                    Gender: {{ profilemodel.gender }}
+                </h3>
+                <h3>
+                    {{ profilemodel.user.email }}
+                </h3>
+                <h4 class="center">ABOUT ME</h4>
+                <p class="center">
+                    {{ profilemodel.description }}
+                </p>
+
+            </h4>
         </div>
+
         <div class="profile-img">
-            <img src="https://media.istockphoto.com/vectors/unknown-person-silhouette-whith-blue-tie-vector-id521573873?k=20&m=521573873&s=612x612&w=0&h=2hHpMHSPRwIvcST3YR5PEU3zp9U8MUV6mBIZ6kN6Tmo="
-                 alt="photo img">
+            {% if profilemodel.photo %}
+                <img src="{{ profilemodel.photo }}" alt="photo img">
+            {% else %}
+                <img src="https://media.istockphoto.com/vectors/unknown-person-silhouette-whith-blue-tie-vector-id521573873?k=20&m=521573873&s=612x612&w=0&h=2hHpMHSPRwIvcST3YR5PEU3zp9U8MUV6mBIZ6kN6Tmo="
+                     alt="photo img">
+            {% endif %}
         </div>
+
         <div class="slider">
-            <div class="button-register small" title="Submit"><a href="#" class="remove">Edit</a></div>
+            <div class="button-register small" title="Submit"><a href="{% url 'update profile' profilemodel.pk %}" class="remove">Edit</a></div>
             <div class="button-register small" title="Submit"><a href="#" class="remove">Delete</a></div>
         </div>
 

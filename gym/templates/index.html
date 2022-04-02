@@ -16,7 +16,13 @@
                 {% if user.is_superuser %}
                     <a href="#" class="button-register" style="width: 40px">Update Site</a>
                 {% endif %}
-                <a href="#" class="button-register" style="width: 40px">Profile Page</a>
+                {% if user.has_profile %}
+                    <a href="{% url 'profile page' user.id %}" class="button-register" style="width: 40px">Profile
+                        Page</a>
+                {% else %}
+                    <a href="{% url 'update profile' user.id %}" class="button-register" style="width: 40px">Profile
+                        Page</a>
+                {% endif %}
 
             {% else %}
                 <a href="{% url 'register' %}" class="button-register" style="width: 40px">Register</a>
