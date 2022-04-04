@@ -9,7 +9,7 @@
     {% if object_list %}
         {% for recipe in object_list %}
             <div class="box-card view-card">
-                <a href="#">
+                <a href="{% url 'details recipe' recipe.pk %}">
 
                     <div class="card-published">{{ recipe.date }}</div>
                     <div class="card-img">
@@ -20,8 +20,8 @@
                         <br>
                         <p>{{ recipe.description | truncatewords:35 }} </p>
                         <br>
-                        <p>Cooking time: {{ recipe.cooking_time }} min </p>
-                        <p>Servings: {{ recipe.servings }} </p>
+                        <p style="display: inline-block"> <i class="fa-solid fa-clock"></i> {{ recipe.cooking_time }} min </p>
+                        <p style="display: inline-block"> <i class="fa-solid fa-user-group"></i>  {{ recipe.servings }} </p>
                         {% if true %}
                             <button class="button-register" style="background-color: #3f51b5;">Edit Recipe</button>
                         {% endif %}

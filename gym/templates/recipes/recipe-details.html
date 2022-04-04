@@ -1,0 +1,30 @@
+{% extends 'new_navigation.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h1><i>Eat <span>better</span> not less ?</i></h1>
+    <div class="box-card recipe">
+        <div class="card-img recipe"><img src="{% static 'images/bootcamp.jpg' %}" alt="meat img"></div>
+        <div class="card-text recipe">
+
+        </div>
+        <div class="options recipe"><br> <i class="fa-solid fa-drumstick-bite"></i> <i class="fa-solid fa-leaf"></i><i class="fa-solid fa-user-group"></i> <i
+                class="fa-solid fa-clock"></i>
+            <button>Delete</button>
+            <button>Edit</button>
+        </div>
+        <div class="card-text2 recipe">
+            What is Lorem Ipsum?
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.
+        </div>
+
+    </div>
+
+
+{% endblock %}

@@ -7,9 +7,9 @@ from gym.auth_app.models import GymUser
 
 class ProfileModel(models.Model):
     choices = [
+        ('Do not show', 'Do not show'),
         ('Male', 'Male'),
         ('Female', 'Female'),
-        ('Do not show', 'Do not show')
     ]
     DEFAULT_CHOICE = choices[2][0]
 

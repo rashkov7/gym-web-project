@@ -9,3 +9,5 @@ class GymInfoModel(models.Model):
     tweeter_URL = models.URLField(null=False, blank=True)
     instagram_URL = models.URLField(null=False, blank=True)
     working_time = models.TextField(null=False, blank=True)
+
+

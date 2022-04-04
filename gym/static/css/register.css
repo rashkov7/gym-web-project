@@ -16,16 +16,19 @@ form {
 
 .input-group {
     position: relative;
-    margin: 45px;
+    margin: 30px 5px;
+    text-align: left;
 }
 
-input, textarea {
+input, input + label > i, textarea, select, url, img {
     width: 100%;
     padding: 10px;
     outline: 0;
     border: 1px solid white;
-    background: transparent;
+    background: rgba(0, 0, 0, 0.5);
     font-size: 15px;
+    color: #ECECEC;
+
 }
 
 label {
@@ -33,29 +36,54 @@ label {
     position: absolute;
     left: 0;
     top: 0;
-    padding: 10px;
     color: white;
     cursor: text;
     transition: 0.2s;
 }
 
-input:focus~label,
-input:valid~label {
-    top: -35px;
-    font-size: 14px;
-}
+/*!*input[type=text]:focus~label, input[type=url]:focus~label,*!*/
+/*input:valid~label, input:valid~label {*/
+/*    top: -35px;*/
+/*    font-size: 14px;*/
+/*}*/
 
-textarea:focus~label,
-textarea:valid~label {
-    top: -35px;
-    font-size: 14px;
-}
 
-.input-group>select{
-    /*width: 100%;*/
-    padding: 10px;
-    outline: 0;
-    border: 1px solid white;
+.wallpaper i {
+    width: 10px;
+    /*margin: -5px;*/
+    border: none;
     background: transparent;
-    font-size: 15px;
+}
+
+
+input:focus ~ label,
+input:valid ~ label {
+    top: -35px;
+    font-size: 14px;
+}
+
+textarea:focus ~ label,
+textarea:valid ~ label {
+    top: -35px;
+    font-size: 14px;
+}
+
+/*.input-group > select {*/
+/*    !*width: 100%;*!*/
+/*    padding: 10px;*/
+/*    outline: 0;*/
+/*    border: 1px solid white;*/
+/*    background: transparent;*/
+/*    font-size: 35px;*/
+/*}*/
+
+input[type=checkbox] {
+    width: 20px;
+    height: 20px;
+
+}
+
+.small.input-group {
+    display: inline-block;
+    margin: 20px 10px;
 }

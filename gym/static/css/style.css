@@ -11,10 +11,13 @@
 }
 h1 {
     color: #ECECEC;
+    padding: 10px;
 }
 h2  {
     color: #ECECEC;
 }
+
+
 html {
     font-family: 'Lato', serif;
     font-size: 16px;
@@ -105,4 +108,16 @@ main {
 .center {
     margin: auto;
     text-align: center;
+}
+
+input[type=number] {
+    width: 50%;
+}
+
+textarea::-webkit-scrollbar {
+  width: 12px;
+  background-color: black; }
+
+.paginator {
+    color: #f44336;
 }

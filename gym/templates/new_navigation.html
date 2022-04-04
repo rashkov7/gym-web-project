@@ -14,7 +14,7 @@
 
 <body>
 <header>
-    <nav class="navbar">
+    <nav class="navbar" style="width: 100%">
         <div class="brand-name"><a href="{% url 'index' %}">Pro<span>Athlete</span>Corner</a></div>
         <a href="#" class="toggle-button active">
             <span class="bar"></span>
@@ -29,7 +29,7 @@
                     <li><a href="#" class="navbar-btn">Coaches</a></li>
                     <li><a href="#" class="navbar-btn">Camps</a></li>
                     <li><a href="#" class="navbar-btn">Workouts</a></li>
-                    <li><a href="#" class="navbar-btn">Recipes</a></li>
+                    <li><a href="{% url 'list recipe' %}" class="navbar-btn">Recipes</a></li>
                     <li><a href="{% url 'profile page' user.id %}" class="navbar-btn">Profile</a></li>
                     <li><a href="{% url 'logout' %}" class="navbar-btn">Logout</a></li>
                 {% else %}

@@ -4,11 +4,10 @@ span {
 }
 
 .box-card {
-    align-items: center;
     justify-content: center;
     display: inline-grid;
     grid-template-columns: 300px;
-    grid-template-rows: 20px 200px 250px 50px;
+    grid-template-rows: 20px 200px 200px 50px;
     grid-template-areas: 'published' 'image' 'text' 'stats';
     border-radius: 20px;
     box-shadow: 5px 10px 15px rgba(19, 18, 18, 0.96);
@@ -49,9 +48,6 @@ span {
 }
 
 .card-text {
-    /*background-color: white;*/
-    /*opacity: 0.5;*/
-    /*color: black;*/
     grid-area: text;
     margin: 10px;
 }
@@ -64,9 +60,10 @@ span {
 
 .card-footer {
     grid-area: stats;
-    display: grid;
+    width: 100%;
+    display: inline-flex;
     grid-template-columns: 150px 150px;
-    grid-template-rows: 50px;
+    grid-template-rows: 50px 50px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     background-color: #f44336;
@@ -110,13 +107,11 @@ span {
     color: white;
 
 }
-.profile-card h1 {
-    text-align: center;
-    padding-top: 80px;
-    font-size: 40px;
-    color: #ECECEC;
-}
 
+
+.card-joined.border {
+    width: 50%;
+}
 
 .profile-card {
     align-items: center;
@@ -126,9 +121,14 @@ span {
     grid-template-columns: 600px 350px;
     grid-template-rows: 30px 400px 30px;
     grid-template-areas: 'title title' 'cv img' 'slider slider';
-    /*height: 100vh;*/
-    /*width: 100%;*/
     position: relative;
+}
+
+.profile-card h1 {
+    text-align: center;
+    padding-top: 80px;
+    font-size: 40px;
+    color: #ECECEC;
 }
 
 .title {
@@ -147,9 +147,9 @@ span {
     background: red;
     margin-right: -50px;
     position: relative;
-    padding:20px;
+    padding: 20px;
     border-radius: 20px;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     color: #ECECEC;
     /*transform: translateY(20%);*/
 }
@@ -168,6 +168,7 @@ span {
     grid-area: slider;
     text-align: center;
 }
+
 .slider a {
     text-decoration-line: none;
     text-decoration-color: #ECECEC;
@@ -175,3 +176,29 @@ span {
     font-weight: bolder;
 }
 
+.box-card.recipe {
+    color: #ECECEC;
+    background-color: rgba(5,5,5,0.3);
+    grid-template-columns: 400px 500px;
+    grid-template-rows:  200px 200px;
+    grid-template-areas: 'image ingredients' 'options text';
+}
+
+.card-text.recipe {
+    grid-area: ingredients;
+    margin: 10px;
+}
+
+.options.recipe {
+    grid-area: options;
+    text-align: left;
+    font-size: 20px;
+    margin: 10px;
+}
+
+.card-text2.recipe {
+    grid-area: text;
+    font-size: 17px;
+    text-align: left;
+    margin: 0;
+}
