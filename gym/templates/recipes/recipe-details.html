@@ -4,24 +4,33 @@
 {% block content %}
 
     <h1><i>Eat <span>better</span> not less ?</i></h1>
+
     <div class="box-card recipe">
-        <div class="card-img recipe"><img src="{% static 'images/bootcamp.jpg' %}" alt="meat img"></div>
+        <div class="card-img recipe"><img src="{{ object.img }}" alt="meat img"></div>
         <div class="card-text recipe">
+            <h2>{{ object.title }} </h2>
+            <h3>Published by {{ object.author }}</h3>
+            <h3>Published on {{ object.date }}</h3>
 
         </div>
-        <div class="options recipe"><br> <i class="fa-solid fa-drumstick-bite"></i> <i class="fa-solid fa-leaf"></i><i class="fa-solid fa-user-group"></i> <i
-                class="fa-solid fa-clock"></i>
-            <button>Delete</button>
-            <button>Edit</button>
+        <div class="options recipe">
+            <br>
+            <div>
+                {% if object.vegan %}
+                    <i class="fa-solid fa-leaf" style=""></i>
+                {% else %}
+                    <i class="fa-solid fa-drumstick-bite"></i>
+                {% endif %}
+            </div>
+            <div><i class="fa-solid fa-user-group"></i> {{ object.servings }}</div>
+            <div><i class="fa-solid fa-clock"></i> {{ object.cooking_time }}min</div>
+            <div><i class="fa-solid fa-thumbs-up" style="padding: 0"></i>{{ object.all_likes }}</div>
+            <div><a href="{% url 'update recipe' object.pk %}" class="button-register">Edit</a></div>
+            <div><a href="{% url 'delete recipe' object.pk %}" class="button-register">Delete</a></div>
+
         </div>
         <div class="card-text2 recipe">
-            What is Lorem Ipsum?
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
-            Aldus PageMaker including versions of Lorem Ipsum.
+            {{ object.description }}
         </div>
 
     </div>

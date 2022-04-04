@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
 
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
 from gym.auth_app.models import GymUser
 from gym.recipe_app.forms import RecipeForm
@@ -36,6 +36,20 @@ class DetailRecipeView(DetailView):
     template_name = 'recipes/recipe-details.html'
     model = RecipeModel
 
+
+class UpdateRecipeView(UpdateView):
+    template_name = 'recipes/edit-recipe.html'
+    model = RecipeModel
+    fields = ('title','description','cooking_time','servings', 'vegan', 'img')
+
+    def get_success_url(self):
+        return reverse_lazy('details recipe', kwargs={'pk':self.object.id})
+
+
+def delete_recipe(request,pk):
+    recipe = RecipeModel.objects.filter(pk=pk)
+    recipe.delete()
+    return redirect('list recipe')
 
 
 @login_required(login_url='login')
