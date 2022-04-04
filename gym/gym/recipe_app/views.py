@@ -1,0 +1,62 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render, redirect, get_object_or_404
+
+from django.urls import reverse_lazy, reverse
+from django.views.generic import CreateView, ListView, DetailView
+
+from gym.auth_app.models import GymUser
+from gym.recipe_app.forms import RecipeForm
+from gym.recipe_app.models import RecipeModel, UserModel
+
+
+class CreateRecipe(LoginRequiredMixin, CreateView):
+    template_name = 'recipes/create_recipe.html'
+    model = RecipeModel
+    form_class = RecipeForm
+    login_url = 'login'
+    redirect_field_name = 'redirect_to'
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.author = self.request.user
+        self.object = form.save(commit=True)
+        return super().form_valid(form)
+
+
+class RecipeListView(ListView, ):
+    template_name = 'recipes/recipes-list.html'
+    model = RecipeModel
+    paginate_by = 3
+    ordering = ['-date']
+
+
+class DetailRecipeView(DetailView):
+    template_name = 'recipes/recipe-details.html'
+    model = RecipeModel
+
+
+
+@login_required(login_url='login')
+def like_recipe(request, pk):
+    recipe = RecipeModel.objects.get(pk=pk)
+    user = request.user
+    all_likes = recipe.likes.all()
+    if user in all_likes:
+        recipe.likes.remove(user)
+        return redirect('list recipe')
+    recipe.likes.add(request.user)
+    return redirect('list recipe')
+
+@login_required(login_url='login')
+def add_favorite(request, pk):
+    recipe = get_object_or_404(RecipeModel, pk=pk)
+    user = request.user
+    if recipe:
+        if user in recipe.favorites.all():
+            recipe.favorites.remove(user)
+            return redirect('list recipe')
+        else:
+            recipe.favorites.add(user)
+            return redirect('list recipe')
