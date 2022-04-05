@@ -1,4 +1,4 @@
-{% extends 'new_navigation.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
@@ -11,7 +11,7 @@
             <div class="box-card view-card">
                 <a href="#">
 
-                    <div class="card-published">{{ recipe.date }}</div>
+                    <div class="card-title">{{ recipe.date }}</div>
                     <div class="card-img">
                         <img src="{{ recipe.img }}" alt="photo of meat">
                     </div>
@@ -27,7 +27,7 @@
                         {% endif %}
                     </div>
                     <div class="card-footer">
-                        <div class="card-joined border">
+                        <div class="card-bottom-half border">
                             <a href="{% url 'like recipe' recipe.pk %}">
                                 <div class="value">
 
@@ -42,7 +42,7 @@
                             </a>
                         </div>
 
-                        <div class="card-joined"><a href="{% url 'favorite recipe' recipe.pk %}">
+                        <div class="card-bottom-half"><a href="{% url 'favorite recipe' recipe.pk %}">
                             <div class="value">
 
                                 {% if user in recipe.favorites.all %}

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'gym.profile_app',
     'gym.main_app',
     'gym.recipe_app',
+    'gym.workout_app',
 ]
 
 MIDDLEWARE = [

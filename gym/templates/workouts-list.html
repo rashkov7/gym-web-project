@@ -1,4 +1,4 @@
-{% extends 'new_navigation.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
@@ -7,7 +7,7 @@
     <br>
     <div class="box-card view-card">
 
-        <div class="card-published">20.10.2018</div>
+        <div class="card-title">20.10.2018</div>
         <div class="card-img">
             <img src="https://previews.123rf.com/images/mitoria/mitoria1710/mitoria171000004/90827828-manger-sommeil-train-r%C3%A9p%C3%A9ter-citation-de-motivation-gym-avec-effet-grunge-et-halt%C3%A8re-affiche-inspira.jpg"
                  alt="dfdsf">
@@ -24,14 +24,14 @@
             {% endif %}
         </div>
         <div class="card-footer">
-            <div class="card-joined border">
+            <div class="card-bottom-half border">
                 <a href="#">
                     <div class="value"><i class="fa-solid fa-thumbs-up"></i>10</div>
                     <div class="type">Liked</div>
                 </a>
             </div>
 
-            <div class="card-joined"><a href="#">
+            <div class="card-bottom-half"><a href="#">
                 <div class="value"><i class="fa-solid fa-heart"></i></div>
                 <div class="type">Add to favorite</div>
             </a>

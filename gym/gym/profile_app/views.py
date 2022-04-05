@@ -10,7 +10,7 @@ UserModel = get_user_model()
 
 
 class UpdateProfileView(UpdateView):
-    template_name = 'profile/profile_update.html'
+    template_name = 'profile/profile-update.html'
     model = ProfileModel
     success_url = reverse_lazy('index')
     form_class = ProfileForm

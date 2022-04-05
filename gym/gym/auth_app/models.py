@@ -10,6 +10,7 @@ class GymUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
     has_profile = models.BooleanField(default=False)
+    trainer = models.BooleanField(default=False)
 
     use_in_migrations = True
 
@@ -21,3 +22,6 @@ class GymUser(AbstractBaseUser, PermissionsMixin):
         verbose_name = "user"
         verbose_name_plural = "users"
         swappable = "AUTH_USER_MODEL"
+
+    def __str__(self):
+        return self.email

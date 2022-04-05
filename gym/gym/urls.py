@@ -22,4 +22,5 @@ urlpatterns = [
     path('auth/', include('gym.auth_app.urls')),
     path('', include('gym.main_app.urls')),
     path('recipe/', include('gym.recipe_app.urls')),
+    path('workout/', include('gym.workout_app.urls')),
 ]

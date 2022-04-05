@@ -1,13 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
 
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
-from gym.auth_app.models import GymUser
 from gym.recipe_app.forms import RecipeForm
-from gym.recipe_app.models import RecipeModel, UserModel
+from gym.recipe_app.models import RecipeModel
 
 
 class CreateRecipe(LoginRequiredMixin, CreateView):
@@ -54,7 +53,7 @@ def delete_recipe(request,pk):
 
 @login_required(login_url='login')
 def like_recipe(request, pk):
-    recipe = RecipeModel.objects.get(pk=pk)
+    recipe = get_object_or_404(RecipeModel, pk=pk)
     user = request.user
     all_likes = recipe.likes.all()
     if user in all_likes:

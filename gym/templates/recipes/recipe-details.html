@@ -1,4 +1,4 @@
-{% extends 'new_navigation.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
@@ -9,12 +9,23 @@
         <div class="card-img recipe"><img src="{{ object.img }}" alt="meat img"></div>
         <div class="card-text recipe">
             <h2>{{ object.title }} </h2>
-            <h3>Published by {{ object.author }}</h3>
-            <h3>Published on {{ object.date }}</h3>
+            <h3><i>Published by {{ object.author }}</i></h3>
+            <h3><i>Published on {{ object.date }}</i></h3>
 
         </div>
         <div class="options recipe">
-            <br>
+        <div class="navbar" style="position: static">
+            <ul>
+                <li class="navbar-links">
+                    <a href="{% url 'delete recipe' object.pk %}">Delete</a>
+                </li>
+                <li class="navbar-links">
+                    <a href="{% url 'update recipe' object.pk %}">Edit</a>
+                </li>
+            </ul>
+
+
+        </div>
             <div>
                 {% if object.vegan %}
                     <i class="fa-solid fa-leaf" style=""></i>
@@ -25,8 +36,6 @@
             <div><i class="fa-solid fa-user-group"></i> {{ object.servings }}</div>
             <div><i class="fa-solid fa-clock"></i> {{ object.cooking_time }}min</div>
             <div><i class="fa-solid fa-thumbs-up" style="padding: 0"></i>{{ object.all_likes }}</div>
-            <div><a href="{% url 'update recipe' object.pk %}" class="button-register">Edit</a></div>
-            <div><a href="{% url 'delete recipe' object.pk %}" class="button-register">Delete</a></div>
 
         </div>
         <div class="card-text2 recipe">

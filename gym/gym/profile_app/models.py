@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date
 
 from django.db import models
 
@@ -21,6 +21,11 @@ class ProfileModel(models.Model):
     description = models.TextField(blank=True, null=True)
     gender = models.CharField(choices=choices, max_length=length_choice, default=DEFAULT_CHOICE)
     photo = models.ImageField(blank=True, null=True)
+    crossfit_coach = models.BooleanField(default=False)
+    yoga_coach = models.BooleanField(default=False)
+    combat_coach = models.BooleanField(default=False)
+    fitness_coach = models.BooleanField(default=False)
+    dance_coach = models.BooleanField(default=False)
 
     user = models.OneToOneField(GymUser, on_delete=models.CASCADE, primary_key=True)
 
@@ -31,5 +36,9 @@ class ProfileModel(models.Model):
     @property
     def age(self):
         if self.birth_date:
-            return datetime.now() - self.birth_date
-        return 'Dont show'
+            today = date.today()
+            return today.year - self.birth_date.year
+        return 'Unknown'
+
+    def __str__(self):
+        return self.full_name

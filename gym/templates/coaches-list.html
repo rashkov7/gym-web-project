@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h1><i>A <span>COACH</span> turns a dreams to a reality!</i></h1>
+
+    {% if object_list %}
+        {% for coach in object_list %}
+            <div class="box-card view-card">
+                <a href="{% url 'profile page' coach.user_id %}">
+
+                    <div class="card-title"><i class="fa-solid fa-star"></i></div>
+                    <div class="card-img">
+                        <img src="{{ coach.photo}}" alt="my photo">
+                    </div>
+                    <div class="card-text">
+                        <h2>
+{#                    {% if coach.gender == 'Male' %}#}
+{#                        <i>the iron </i>#}
+{#                    {% elif coach.gender == 'Female' %}#}
+{#                        <i>the beauty </i>#}
+{#                    {% endif %}#}
+                        {{ coach.full_name }}
+                        </h2>
+                        <br>
+                        <p>{{ coach.description | truncatewords:35 }} </p>
+                        {% if coach.crossfit_coach %}
+                            <h4>
+                            <span>
+                                <i class="fa-solid fa-hand-point-right"></i>
+                                <span style="color: #ECECEC">CrossFIt</span>
+                            </span>
+                            </h4>
+                        {% endif %}
+                        {% if coach.fitness_coach %}
+                            <h4>
+                            <span>
+                                <i class="fa-solid fa-hand-point-right"></i>
+                                <span style="color: #ECECEC">Fitness</span>
+                            </span>
+                            </h4>
+                        {% endif %}
+                        {% if coach.combat_coach %}
+                            <h4>
+                            <span>
+                                <i class="fa-solid fa-hand-point-right"></i>
+                                <span style="color: #ECECEC">Combat</span>
+                            </span>
+                            </h4>
+                        {% endif %}
+                        {% if coach.yoga_coach %}
+                            <h4>
+                            <span>
+                                <i class="fa-solid fa-hand-point-right"></i>
+                                <span style="color: #ECECEC">Yoga</span>
+                            </span>
+                            </h4>
+                        {% endif %}
+                        {% if coach.dance_coach %}
+                            <h4>
+                            <span>
+                                <i class="fa-solid fa-hand-point-right"></i>
+                                <span style="color: #ECECEC">Dance</span>
+                            </span>
+                            </h4>
+                        {% endif %}
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-bottom-half border">
+                            <a href="#">
+                                <div class="value">
+                                    <i class="fa-solid fa-dumbbell"></i>
+                                </div>
+                                <div class="type">TRAIN WITH ME</div>
+                            </a>
+                        </div>
+
+                        <div class="card-bottom-half"><a href="#">
+                            <div class="value">
+                                <i class="fa-solid fa-signs-post"></i>
+                            </div>
+                            <div class="type">CAMPS WITH ME</div>
+                        </a>
+
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+
+        <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+        </div>
+    {% else %}
+        <h1>We are looking for the best coaches.</h1>
+    {% endif %}
+
+
+{% endblock %}

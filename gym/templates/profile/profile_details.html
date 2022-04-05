@@ -1,4 +1,4 @@
-{% extends 'new_navigation.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
@@ -6,23 +6,30 @@
     <h1><i>Profile Page</i></h1>
     <div class="profile-card">
         <div class="title">
-            <h1>{{ object.full_name }}</h1>
+            <h1>
+                {% if object.gender == 'Male' %}Mrs. {% endif %}
+                {% if object.gender == 'Female' %} Ms. {% endif %}
+                {{ object.full_name }}</h1>
         </div>
         <div class="cv">
             <h4>
-                <h3>
-                    Age: {{ profilemodel.age }}
+                <h3> Age: {{ profilemodel.age }}
+                    {% if object.user.trainer %}
+                        <span> <i class="fa-solid fa-star"></i> </span>
+                    {% endif %}
                 </h3>
-                <h3>
-                    Gender: {{ profilemodel.gender }}
-                </h3>
-                <h3>
-                    {{ profilemodel.user.email }}
-                </h3>
+                <h3> Gender: {{ profilemodel.gender }}</h3>
+                <h3>{{ profilemodel.user.email }}</h3>
                 <h4 class="center">ABOUT ME</h4>
                 <p class="center">
                     {{ profilemodel.description }}
                 </p>
+                <ul class="navbar-links center">
+                    <br>
+                    <li><a href="#" class="navbar-btn">My Recipes</a></li>
+                    <li><a href="#" class="navbar-btn">My Workouts</a></li>
+                    <li><a href="#" class="navbar-btn">My Camps</a></li>
+                </ul>
 
             </h4>
         </div>
@@ -30,15 +37,21 @@
         <div class="profile-img">
             {% if profilemodel.photo %}
                 <img src="{{ profilemodel.photo }}" alt="photo img">
+                <p class="a"><i class="fa-solid fa-camera"></i></p>
             {% else %}
                 <img src="https://media.istockphoto.com/vectors/unknown-person-silhouette-whith-blue-tie-vector-id521573873?k=20&m=521573873&s=612x612&w=0&h=2hHpMHSPRwIvcST3YR5PEU3zp9U8MUV6mBIZ6kN6Tmo="
                      alt="photo img">
+                <a href="#"><i class="fa-solid fa-camera"></i></a>
             {% endif %}
         </div>
 
         <div class="slider">
-            <div class="button-register small" title="Submit"><a href="{% url 'update profile' profilemodel.pk %}" class="remove">Edit</a></div>
-            <div class="button-register small" title="Submit"><a href="#" class="remove">Delete</a></div>
+            <a href="{% url 'update profile' profilemodel.pk %}" class="remove">
+                <div class="button-register small">Edit</div>
+            </a>
+            <a href="#" class="remove">
+                <div class="button-register small">Delete</div>
+            </a>
         </div>
 
     </div>
