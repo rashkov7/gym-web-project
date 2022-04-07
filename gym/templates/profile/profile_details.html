@@ -26,8 +26,8 @@
                 </p>
                 <ul class="navbar-links center">
                     <br>
-                    <li><a href="#" class="navbar-btn">My Recipes</a></li>
-                    <li><a href="#" class="navbar-btn">My Workouts</a></li>
+                    <li><a href="{% url 'my recipes' object.pk %}" class="navbar-btn">My Recipes</a></li>
+                    <li><a href="{% url 'my workouts' object.pk %}" class="navbar-btn">My Workouts</a></li>
                 </ul>
 
             </h4>

@@ -15,7 +15,7 @@ def index_test(request):
     if not exist_gym_info:
         new_in = GymInfoModel.objects.create(h1='Update web site info !')
     context = {'is_true': "Abra kadabra"}
-    return render(request, 'workouts-list.html', context)
+    return render(request, 'index.html', context)
 
 
 class CoachListView(ListView):

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h1><i>These are <span>MACHINES</span>!</i></h1>
+
+    {% for obj in object_list %}
+        <div class="comment center">
+            <h2><span>{{ obj.title }}</span></h2>
+            <h3>{{ obj.author }}</h3>
+            <h5><i>{{ obj.description }}</i></h5>
+
+            <ul class="navbar-links center">
+                <br>
+                <li><a href="{% url 'details recipe' obj.pk %}" class="navbar-btn">Details</a></li>
+                <li><a href="{% url 'favorite recipe' obj.pk %}" class="navbar-btn">remove it</a></li>
+            </ul>
+
+        </div>
+    {% endfor %}
+
+    <h1></h1>
+    <p><a href="{% url 'profile page' user.id %}" class="button-register" style="width: 40px">BACK</a></p>
+
+{% endblock %}

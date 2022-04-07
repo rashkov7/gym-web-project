@@ -1,7 +1,7 @@
 from django.urls import path
 
 from gym.recipe_app.views import CreateRecipe, RecipeListView, like_recipe, add_favorite, DetailRecipeView, \
-    UpdateRecipeView,delete_recipe,create_recipe_comment
+    UpdateRecipeView, delete_recipe, create_recipe_comment
 
 urlpatterns = (
     path('create/', CreateRecipe.as_view(), name='create recipe'),

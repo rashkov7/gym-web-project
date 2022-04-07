@@ -255,9 +255,10 @@ span {
 /*        'options text';*/
 /*}*/
 
-#comment {
+.comment {
     text-decoration-color: #ECECEC;
     width: 50%;
+    padding: 20px;
     color: #ECECEC;
     justify-content: center;
     border-radius: 20px;

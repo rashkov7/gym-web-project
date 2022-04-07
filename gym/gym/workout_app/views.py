@@ -62,7 +62,6 @@ class CoachWorkoutsListView(ListView):
     template_name = 'workout/workout-list.html'
     model = WorkoutModel
 
-
     def get_queryset(self):
         if self.queryset is not None:
             queryset = self.queryset
@@ -110,6 +109,4 @@ class WorkoutDetailView(DetailView):
 
         return super().get_context_data(**context)
 
-
         # query = )
-

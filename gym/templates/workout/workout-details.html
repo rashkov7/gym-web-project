@@ -31,9 +31,9 @@
                 <br>
                 <p><i class="fa-solid fa-location-dot"></i> Place of event: {{ object.venue }}</p>
             {% endif %}
-                {% for coach in coaches %}
-                    <p>Coach e-mail: {{ coach.email }}</p>
-                {% endfor %}
+            {% for coach in coaches %}
+                <p>Coach e-mail: {{ coach.email }}</p>
+            {% endfor %}
         </div>
         <div class="card-text2 recipe">
             {{ object.description }}
