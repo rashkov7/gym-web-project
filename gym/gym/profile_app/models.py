@@ -42,3 +42,9 @@ class ProfileModel(models.Model):
 
     def __str__(self):
         return self.full_name
+
+    @property
+    def is_stars_by_the_user(self):
+        b = self.star_owner.filter(owner__user=self.user)
+        if b:
+            return True

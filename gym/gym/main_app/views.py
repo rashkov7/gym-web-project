@@ -1,9 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ImproperlyConfigured
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView
 
-from gym.main_app.models import GymInfoModel
+from gym.main_app.models import GymInfoModel, StarCoach
 from gym.profile_app.models import ProfileModel
 
 UserModel = get_user_model()
@@ -37,3 +37,13 @@ class CoachListView(ListView):
                 )
         return self.queryset.all()
 
+
+def star_coach(request, pk):
+    coach = get_object_or_404(ProfileModel, pk=pk)
+    user = request.user
+    star = StarCoach.objects.filter(owner__user_id=pk)
+    if star:
+        star.delete()
+    else:
+        StarCoach.objects.create(owner=coach, sender=user)
+    return redirect('trainers')

@@ -16,7 +16,7 @@
                     </div>
                     <div class="card-text">
                         <h2>
-                        {{ coach.full_name }}
+                            {{ coach.full_name }}
                         </h2>
                         <br>
                         <p>{{ coach.description | truncatewords:35 }} </p>
@@ -72,12 +72,18 @@
                             </a>
                         </div>
 
-                        <div class="card-bottom-half"><a href="#">
-                            <div class="value">
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                            <div class="type">GIV ME A STAR</div>
-                        </a>
+                        <div class="card-bottom-half">
+                            <a href="{% url 'star the coach' coach.pk %}">
+                                <div class="value">
+                                    {% if coach.is_stars_by_the_user %}
+                                        <i class="fa-solid fa-star" style="color: #ECECEC"></i>
+                                        <div class="type"> Thank you</div>
+                                    {% else %}
+                                        <i class="fa-solid fa-star"></i>
+                                        <div class="type">GIV ME A STAR</div>
+                                    {% endif %}
+                                </div>
+                            </a>
 
                         </div>
                     </div>
