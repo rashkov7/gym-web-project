@@ -26,8 +26,7 @@ class CoachListView(ListView):
     def get_queryset(self):
         if self.queryset is None:
             if self.model:
-                a = self.model._default_manager.filter(user__trainer=True)
-                return a
+                return self.model._default_manager.filter(user__trainer=True)
             else:
                 raise ImproperlyConfigured(
                     "%(cls)s is missing a QuerySet. Define "

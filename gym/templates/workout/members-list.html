@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h1><i>These are <span>MACHINES</span>!</i></h1>
+
+    {%  for obj in object_list %}
+        <h2 style="color: #ECECEC">{{ obj.profilemodel.full_name }}</h2>
+    {% endfor %}
+
+    <h1></h1>
+    <p><a href="{% url 'workout list' %}" class="button-register" style="width: 40px">BACK</a></p>
+
+{% endblock %}

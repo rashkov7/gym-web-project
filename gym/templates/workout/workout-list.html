@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h1><i>Don't sit get <span>FIT</span>!</i></h1>
+    <p><a href="{% url 'create workout' %}" class="button-register" style="width: 40px">Add new workout</a></p>
+    <br>
+    {% if object_list %}
+        {% for workout in object_list %}
+            <div class="box-card view-card">
+                <a href="{% url 'details recipe' workout.pk %}">
+
+                    <div class="card-title"></div>
+                    <div class="card-img">
+                        <img src="{{ workout.img }}" alt="gym's photo">
+                    </div>
+                    <div class="card-text">
+                        <u style="color: #ECECEC"><h3>{{ workout.title }}</h3></u>
+                        <br>
+                        <p><i class="fa-solid fa-calendar-days"></i>: {{ workout.date }}</p>
+                        <p><i class="fa-solid fa-clock"></i>: {{ workout.hour }}</p>
+                        <br>
+                        <p>{{ workout.description | truncatewords:35 }} </p>
+                        <br>
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-bottom-half border">
+                            <a href="{% url 'attendees list' workout.pk %}">
+                                <div class="value">
+
+                                    {% if user in workout.participants %}
+                                        <i class="fa-solid fa-people-group" style="color: #ECECEC"></i>
+                                        {#                                        <i class="fa-solid fa-thumbs-up"></i>#}
+                                    {% else %}
+                                        <i class="fa-solid fa-people-group"></i>
+                                        {#                                        <i class="fa-solid fa-thumbs-up"></i>#}
+                                    {% endif %}
+                                    {{ recipe.all_likes }}
+                                </div>
+                                <div class="type">Attendees</div>
+                            </a>
+                        </div>
+
+                        <div class="card-bottom-half"><a href="{% url 'signup workout' workout.pk %}">
+                            {% if user in workout.participant.all %}
+                                <div class="value">
+                                    <i class="fa-solid fa-user-check" style="color: #ECECEC"></i>
+                                </div>
+                                <div class="type" style="margin: 0 30px"> SIGN OUT</div>
+                            {% else %}
+                                <div class="value">
+                                    <i class="fa-solid fa-user-plus"></i>
+                                </div>
+                                <div class="type" style="margin: 0 40px"> SIGN ME</div>
+                            {% endif %}
+                        </a>
+
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+        <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+        </div>
+    {% else %}
+        <h1>There is no workouts</h1>
+    {% endif %}
+
+
+{% endblock %}

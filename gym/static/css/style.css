@@ -48,7 +48,6 @@ header {
 main {
     grid-area: main;
     text-align: center;
-
 }
 
 .button-register {
@@ -123,4 +122,9 @@ textarea::-webkit-scrollbar {
 
 .paginator {
     color: #f44336;
+}
+
+.form-control {
+    display: inline-block;
+    width: 80%;
 }

@@ -39,13 +39,13 @@ class DetailRecipeView(DetailView):
 class UpdateRecipeView(UpdateView):
     template_name = 'recipes/edit-recipe.html'
     model = RecipeModel
-    fields = ('title','description','cooking_time','servings', 'vegan', 'img')
+    fields = ('title', 'description', 'cooking_time', 'servings', 'vegan', 'img')
 
     def get_success_url(self):
-        return reverse_lazy('details recipe', kwargs={'pk':self.object.id})
+        return reverse_lazy('details recipe', kwargs={'pk': self.object.id})
 
 
-def delete_recipe(request,pk):
+def delete_recipe(request, pk):
     recipe = RecipeModel.objects.filter(pk=pk)
     recipe.delete()
     return redirect('list recipe')
@@ -61,6 +61,7 @@ def like_recipe(request, pk):
         return redirect('list recipe')
     recipe.likes.add(request.user)
     return redirect('list recipe')
+
 
 @login_required(login_url='login')
 def add_favorite(request, pk):

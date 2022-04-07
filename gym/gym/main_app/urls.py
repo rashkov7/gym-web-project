@@ -1,6 +1,6 @@
 from django.urls import path
 
-from gym.main_app.views import index_test,CoachListView
+from gym.main_app.views import index_test, CoachListView
 
 urlpatterns = (
     path('', index_test, name='index'),

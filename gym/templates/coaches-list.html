@@ -12,15 +12,10 @@
 
                     <div class="card-title"><i class="fa-solid fa-star"></i></div>
                     <div class="card-img">
-                        <img src="{{ coach.photo}}" alt="my photo">
+                        <img src="{{ coach.photo }}" alt="my photo">
                     </div>
                     <div class="card-text">
                         <h2>
-{#                    {% if coach.gender == 'Male' %}#}
-{#                        <i>the iron </i>#}
-{#                    {% elif coach.gender == 'Female' %}#}
-{#                        <i>the beauty </i>#}
-{#                    {% endif %}#}
                         {{ coach.full_name }}
                         </h2>
                         <br>
@@ -69,7 +64,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="card-bottom-half border">
-                            <a href="#">
+                            <a href="{% url 'coach workouts' coach.pk %}">
                                 <div class="value">
                                     <i class="fa-solid fa-dumbbell"></i>
                                 </div>

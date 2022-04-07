@@ -28,7 +28,7 @@
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'trainers' %}" class="navbar-btn">Coaches</a></li>
                     <li><a href="#" class="navbar-btn">Camps</a></li>
-                    <li><a href="#" class="navbar-btn">Workouts</a></li>
+                    <li><a href="{% url 'workout list' %}" class="navbar-btn">Workouts</a></li>
                     <li><a href="{% url 'list recipe' %}" class="navbar-btn">Recipes</a></li>
                     <li><a href="{% url 'profile page' user.id %}" class="navbar-btn">Profile</a></li>
                     <li><a href="{% url 'logout' %}" class="navbar-btn">Logout</a></li>
