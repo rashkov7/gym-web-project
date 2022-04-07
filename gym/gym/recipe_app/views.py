@@ -4,9 +4,10 @@ from django.shortcuts import redirect, get_object_or_404
 
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+from django.views.generic.edit import FormMixin
 
-from gym.recipe_app.forms import RecipeForm
-from gym.recipe_app.models import RecipeModel
+from gym.recipe_app.forms import RecipeForm, RecipeCommentForm
+from gym.recipe_app.models import RecipeModel, CommentRecipeModel
 
 
 class CreateRecipe(LoginRequiredMixin, CreateView):
@@ -31,9 +32,27 @@ class RecipeListView(ListView, ):
     ordering = ['-date']
 
 
-class DetailRecipeView(DetailView):
+class DetailRecipeView(FormMixin, DetailView):
     template_name = 'recipes/recipe-details.html'
     model = RecipeModel
+    form_class = RecipeCommentForm
+
+    def get_context_data(self, **kwargs):
+        result = super().get_context_data(**kwargs)
+        result['form'] = self.get_form()
+        result['comments'] = CommentRecipeModel.objects.filter(recipe_id=self.kwargs['pk'])
+        return result
+
+
+def create_recipe_comment(request, pk):
+    recipe = get_object_or_404(RecipeModel, pk=pk)
+    user = request.user
+    CommentRecipeModel.objects.create(
+        text=request.POST['text'],
+        owner=user,
+        recipe=recipe,
+    )
+    return redirect('details recipe', pk)
 
 
 class UpdateRecipeView(UpdateView):

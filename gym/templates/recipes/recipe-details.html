@@ -14,18 +14,16 @@
 
         </div>
         <div class="options recipe">
-        <div class="navbar" style="position: static">
-            <ul>
-                <li class="navbar-links">
-                    <a href="{% url 'delete recipe' object.pk %}">Delete</a>
-                </li>
-                <li class="navbar-links">
-                    <a href="{% url 'update recipe' object.pk %}">Edit</a>
-                </li>
-            </ul>
-
-
-        </div>
+            <div class="navbar" style="position: static">
+                <ul>
+                    <li class="navbar-links">
+                        <a href="{% url 'delete recipe' object.pk %}">Delete</a>
+                    </li>
+                    <li class="navbar-links">
+                        <a href="{% url 'update recipe' object.pk %}">Edit</a>
+                    </li>
+                </ul>
+            </div>
             <div>
                 {% if object.vegan %}
                     <i class="fa-solid fa-leaf" style=""></i>
@@ -42,6 +40,30 @@
             {{ object.description }}
         </div>
 
+    </div>
+
+    <div class="center">
+        <form class="center" action="{% url 'comment recipe' object.pk %}" method="post">
+            <input type="submit" class="button" title="Submit">
+            {% csrf_token %}
+            {{ form }}
+
+        </form>
+    </div>
+
+    <div id="comment" class="center">
+        {% for comment in comments %}
+            <h3>
+                {{ comment.name_owner }}
+
+            </h3>
+            <i><p>{{ comment.date }}</p></i>
+            <h4>
+                {{ comment.text }}
+            </h4>
+            <br>
+
+        {% endfor %}
     </div>
 
 

@@ -27,7 +27,6 @@
             <ul>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'trainers' %}" class="navbar-btn">Coaches</a></li>
-                    <li><a href="#" class="navbar-btn">Camps</a></li>
                     <li><a href="{% url 'workout list' %}" class="navbar-btn">Workouts</a></li>
                     <li><a href="{% url 'list recipe' %}" class="navbar-btn">Recipes</a></li>
                     <li><a href="{% url 'profile page' user.id %}" class="navbar-btn">Profile</a></li>
@@ -53,38 +52,7 @@
 
 
 <footer>
-    <section id="social">
-        <div class="contacts">
-            <ul>
-                <li class="fa-icon">
-                    <i class="fa fa-facebook-square" aria-hidden="true"></i>
-                </li>
-                <li class="fa-icon">
-                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                </li>
-                <li class="fa-icon">
-                    <i class="fa fa-twitter-square" aria-hidden="true"></i>
-                </li>
-                <li class="fa-icon">
-                    <i class="fa fa-instagram" aria-hidden="true"></i>
-                </li>
-            </ul>
-        </div>
-    </section>
-    <div id="info"><h1>Work time</h1></div>
-    <div id="links">
-        <div class="footer-links">
-            <ul>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Coaches</a></li>
-                <li><a href="#">Workouts</a></li>
-                <li><a href="#">Camps</a></li>
-                <li><a href="#">Recipes</a></li>
-            </ul>
-        </div>
-    </div>
-    <div id="map"><img src="https://www.w3schools.com/w3images/map.jpg" alt="map"></div>
-    <div id="bottom"><p>&copy; Copyright 2022 ProAthleteCorner Team. All rights reserved.</p></div>
+
 </footer>
 </body>
 </html>

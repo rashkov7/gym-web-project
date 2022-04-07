@@ -25,3 +25,15 @@ class RecipeModel(models.Model):
     @property
     def all_favorites(self):
         return self.favorites.count()
+
+
+class CommentRecipeModel(models.Model):
+    text = models.TextField()
+    date = models.DateField(auto_now_add=True)
+    owner = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(RecipeModel, on_delete=models.CASCADE)
+
+    @property
+    def name_owner(self):
+        name = self.owner.profilemodel.full_name
+        return name

@@ -9,11 +9,13 @@
     margin: 0;
     box-sizing: border-box;
 }
+
 h1 {
     color: #ECECEC;
     padding: 10px;
 }
-h2  {
+
+h2 {
     color: #ECECEC;
 }
 
@@ -30,19 +32,20 @@ html {
 
 body {
     margin: 0;
-    background: linear-gradient(to bottom right, rgb(0, 0, 0, 0.01), black), url("../images/form-wallpaper.jpg") black center;
+    background: linear-gradient(to bottom right, rgb(0, 0, 0, 0.01), black), url("../images/form-wallpaper.jpg") black scroll;
     align-items: center;
     background-size: cover;
-    display: grid;
-    grid-template-columns: 30% 30% 40%;
-    grid-template-rows: 40px 700px 200px;
-    grid-template-areas: "header header header"
-                        "main main main"
-                        "footer footer footer";
+    /*display: grid;*/
+    /*grid-template-columns: 30% 30% 40%;*/
+    /*grid-template-rows: 40px 800px 200px;*/
+    /*grid-template-areas: "header header header"*/
+    /*                    "main main main"*/
+    /*                    "footer footer footer";*/
 }
 
 header {
     grid-area: header;
+    padding: 0 0 50px 0;
 }
 
 main {
@@ -78,7 +81,7 @@ main {
     transform: translateY(4px);
 }
 
-.small.button-register{
+.small.button-register {
     width: 20%;
     margin: 5px;
     display: inline-block;
@@ -89,12 +92,13 @@ main {
     font-size: 55px;
     opacity: 0.4;
 }
+
 #quote {
     padding: 50px;
     margin: 10px auto;
     color: #ECECEC;
     width: 50%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     border-radius: 100px;
 }
 
@@ -117,8 +121,9 @@ input[type=number] {
 }
 
 textarea::-webkit-scrollbar {
-  width: 12px;
-  background-color: black; }
+    width: 12px;
+    background-color: black;
+}
 
 .paginator {
     color: #f44336;
