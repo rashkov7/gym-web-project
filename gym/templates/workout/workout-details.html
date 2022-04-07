@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h1><i>Let's see how far <span>YOU</span> can go ?</i></h1>
+
+    <div class="box-card recipe">
+        <div class="card-img recipe"><img src="{{ object.img }}" alt="workout img"></div>
+        <div class="card-text recipe">
+            <h2>{{ object.title }} </h2>
+            <div><i class="fa-solid fa-clock"></i>: {{ workoutmodel.hour }}h</div>
+            <div><i class="fa-solid fa-calendar-days"></i>: {{ workoutmodel.date }}</div>
+        </div>
+        <div class="options recipe">
+
+            {% if user.trainer %}
+                <div class="navbar" style="position: static">
+                    <ul>
+                        <li class="navbar-links">
+                            <a href="{% url 'delete recipe' object.pk %}">Delete</a>
+                        </li>
+                        <li class="navbar-links">
+                            <a href="{% url 'update recipe' object.pk %}">Edit</a>
+                        </li>
+                    </ul>
+                </div>
+            {% else %}
+                <br>
+                <p><i class="fa-solid fa-hand-point-right"> Type of workout: {{ object.type_of_workout }}</i></p>
+                <br>
+                <p><i class="fa-solid fa-location-dot"></i> Place of event: {{ object.venue }}</p>
+            {% endif %}
+                {% for coach in coaches %}
+                    <p>Coach e-mail: {{ coach.email }}</p>
+                {% endfor %}
+        </div>
+        <div class="card-text2 recipe">
+            {{ object.description }}
+        </div>
+
+    </div>
+
+{% endblock %}
