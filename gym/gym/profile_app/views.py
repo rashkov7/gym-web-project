@@ -21,7 +21,7 @@ class UpdateProfileView(UserAuthorizedMixin, UpdateView):
     model = ProfileModel
     success_url = reverse_lazy('index')
     form_class = ProfileForm
-    permission_required = ''
+    permission_required = 'profile_app.change_profilemodel'
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
