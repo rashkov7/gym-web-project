@@ -4,13 +4,15 @@
 {% block content %}
 
     <h1><i>Eat <span>better</span> not less ?</i></h1>
-    <p><a href="{% url 'create recipe' %}" class="button-register" style="width: 40px">Add Recipe</a></p>
+    <br>
+    {% if user.is_staff %}
+        <p><a href="{% url 'create recipe' %}" class="button-register" style="width: 40px">Add Recipe</a></p>
+    {% endif %}
     <br>
     {% if object_list %}
         {% for recipe in object_list %}
             <div class="box-card view-card">
                 <a href="{% url 'details recipe' recipe.pk %}">
-
                     <div class="card-title">{{ recipe.date }}</div>
                     <div class="card-img">
                         <img src="{{ recipe.img }}" alt="photo of meat">
@@ -20,8 +22,10 @@
                         <br>
                         <p>{{ recipe.description | truncatewords:35 }} </p>
                         <br>
-                        <p style="display: inline-block"> <i class="fa-solid fa-clock"></i> {{ recipe.cooking_time }} min </p>
-                        <p style="display: inline-block"> <i class="fa-solid fa-user-group"></i>  {{ recipe.servings }} </p>
+                        <p style="display: inline-block"><i class="fa-solid fa-clock"></i> {{ recipe.cooking_time }} min
+                        </p>
+                        <p style="display: inline-block"><i class="fa-solid fa-user-group"></i> {{ recipe.servings }}
+                        </p>
                         {% if true %}
                             <button class="button-register" style="background-color: #3f51b5;">Edit Recipe</button>
                         {% endif %}

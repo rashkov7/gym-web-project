@@ -14,7 +14,6 @@ class RecipeModel(models.Model):
     vegan = models.BooleanField(default=False)
 
     author = models.ForeignKey(UserModel, on_delete=models.CASCADE, null=True, blank=True)
-
     likes = models.ManyToManyField(UserModel, related_name='recipe_likes', blank=True)
     favorites = models.ManyToManyField(UserModel, default=None, related_name='recipe_favorite', blank=True)
 

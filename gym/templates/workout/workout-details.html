@@ -14,7 +14,7 @@
         </div>
         <div class="options recipe">
 
-            {% if user.trainer %}
+            {% if user.trainer or user.is_superuser %}
                 <div class="navbar" style="position: static">
                     <ul>
                         <li class="navbar-links">
@@ -27,9 +27,9 @@
                 </div>
             {% else %}
                 <br>
-                <p><i class="fa-solid fa-hand-point-right"> Type of workout: {{ object.type_of_workout }}</i></p>
+                <p><i class="fa-solid fa-hand-point-right"> Workout: {{ object.type_of_workout }}</i></p>
                 <br>
-                <p><i class="fa-solid fa-location-dot"></i> Place of event: {{ object.venue }}</p>
+                <p><i class="fa-solid fa-location-dot"></i> Place: {{ object.venue }}</p>
             {% endif %}
             {% for coach in coaches %}
                 <p>Coach e-mail: {{ coach.email }}</p>

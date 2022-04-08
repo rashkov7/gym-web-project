@@ -1,5 +1,5 @@
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import redirect, get_object_or_404
 
 from django.urls import reverse_lazy
@@ -10,11 +10,11 @@ from gym.recipe_app.forms import RecipeForm, RecipeCommentForm
 from gym.recipe_app.models import RecipeModel, CommentRecipeModel
 
 
-class CreateRecipe(LoginRequiredMixin, CreateView):
+class CreateRecipe(PermissionRequiredMixin, CreateView):
     template_name = 'recipes/create_recipe.html'
     model = RecipeModel
     form_class = RecipeForm
-    login_url = 'login'
+    permission_required = 'recipe_app.add_recipemodel'
     redirect_field_name = 'redirect_to'
     success_url = reverse_lazy('index')
 
@@ -25,14 +25,14 @@ class CreateRecipe(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class RecipeListView(ListView, ):
+class RecipeListView(LoginRequiredMixin, ListView):
     template_name = 'recipes/recipes-list.html'
     model = RecipeModel
     paginate_by = 3
     ordering = ['-date']
 
 
-class DetailRecipeView(FormMixin, DetailView):
+class DetailRecipeView(LoginRequiredMixin, FormMixin, DetailView):
     template_name = 'recipes/recipe-details.html'
     model = RecipeModel
     form_class = RecipeCommentForm
@@ -44,6 +44,7 @@ class DetailRecipeView(FormMixin, DetailView):
         return result
 
 
+@login_required
 def create_recipe_comment(request, pk):
     recipe = get_object_or_404(RecipeModel, pk=pk)
     user = request.user
@@ -55,22 +56,24 @@ def create_recipe_comment(request, pk):
     return redirect('details recipe', pk)
 
 
-class UpdateRecipeView(UpdateView):
+class UpdateRecipeView(PermissionRequiredMixin, UpdateView):
     template_name = 'recipes/edit-recipe.html'
     model = RecipeModel
     fields = ('title', 'description', 'cooking_time', 'servings', 'vegan', 'img')
+    permission_required = 'recipe_ape.change_recipemodel'
 
     def get_success_url(self):
         return reverse_lazy('details recipe', kwargs={'pk': self.object.id})
 
 
+@permission_required('recipe_ape.delete_recipemodel')
 def delete_recipe(request, pk):
     recipe = RecipeModel.objects.filter(pk=pk)
     recipe.delete()
     return redirect('list recipe')
 
 
-@login_required(login_url='login')
+@login_required
 def like_recipe(request, pk):
     recipe = get_object_or_404(RecipeModel, pk=pk)
     user = request.user
@@ -82,7 +85,7 @@ def like_recipe(request, pk):
     return redirect('list recipe')
 
 
-@login_required(login_url='login')
+@login_required
 def add_favorite(request, pk):
     recipe = get_object_or_404(RecipeModel, pk=pk)
     user = request.user

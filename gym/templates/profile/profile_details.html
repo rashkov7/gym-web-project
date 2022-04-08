@@ -24,11 +24,13 @@
                 <p class="center">
                     {{ profilemodel.description }}
                 </p>
-                <ul class="navbar-links center">
-                    <br>
-                    <li><a href="{% url 'my recipes' object.pk %}" class="navbar-btn">My Recipes</a></li>
-                    <li><a href="{% url 'my workouts' object.pk %}" class="navbar-btn">My Workouts</a></li>
-                </ul>
+                {% if owner or user.is_superuser %}
+                    <ul class="navbar-links center">
+                        <br>
+                        <li><a href="{% url 'my recipes' object.pk %}" class="navbar-btn">My Recipes</a></li>
+                        <li><a href="{% url 'my workouts' object.pk %}" class="navbar-btn">My Workouts</a></li>
+                    </ul>
+                {% endif %}
 
             </h4>
         </div>
@@ -45,11 +47,13 @@
         </div>
 
         <div class="slider">
-            <a href="{% url 'update profile' profilemodel.pk %}" class="remove">
-                <div class="button-register small">Edit</div>
-            </a>
-            <a href="#" class="remove">
+            {% if owner %}
+                <a href="{% url 'update profile' profilemodel.pk %}" class="remove">
+                    <div class="button-register small">Edit</div>
+                </a>
+                <a href="#" class="remove">
                 <div class="button-register small">Delete</div>
+            {% endif %}
             </a>
         </div>
 

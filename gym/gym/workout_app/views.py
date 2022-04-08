@@ -1,11 +1,12 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.exceptions import ImproperlyConfigured
 from django.db.models import QuerySet
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect
 
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView
-from django.views.generic.list import MultipleObjectMixin
 
 from gym.auth_app.models import GymUser
 from gym.workout_app.forms import WorkoutCreateForm
@@ -14,12 +15,12 @@ from gym.workout_app.models import WorkoutModel
 UserModel = get_user_model()
 
 
-class WorkoutListView(ListView):
+class WorkoutListView(LoginRequiredMixin, ListView):
     template_name = 'workout/workout-list.html'
     model = WorkoutModel
 
 
-class AttendeesListView(ListView):
+class AttendeesListView(LoginRequiredMixin, ListView):
     template_name = 'workout/members-list.html'
     model = GymUser
 
@@ -48,6 +49,7 @@ class AttendeesListView(ListView):
         return queryset
 
 
+@login_required
 def sign_me(request, pk):
     obj = get_object_or_404(WorkoutModel, pk=pk)
     user = request.user
@@ -58,7 +60,7 @@ def sign_me(request, pk):
     return redirect('workout list')
 
 
-class CoachWorkoutsListView(ListView):
+class CoachWorkoutsListView(LoginRequiredMixin, ListView):
     template_name = 'workout/workout-list.html'
     model = WorkoutModel
 
@@ -85,13 +87,14 @@ class CoachWorkoutsListView(ListView):
         return queryset
 
 
-class WorkoutCreateView(CreateView):
+class WorkoutCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'workout/create-workout.html'
     form_class = WorkoutCreateForm
     success_url = reverse_lazy('workout list')
+    permission_required = 'workout_app.add_workoutmodel'
 
 
-class WorkoutDetailView(DetailView):
+class WorkoutDetailView(LoginRequiredMixin, DetailView):
     template_name = 'workout/workout-details.html'
     model = WorkoutModel
 

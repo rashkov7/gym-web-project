@@ -1,4 +1,6 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ImproperlyConfigured
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView
@@ -18,7 +20,7 @@ def index_test(request):
     return render(request, 'index.html', context)
 
 
-class CoachListView(ListView):
+class CoachListView(LoginRequiredMixin, ListView):
     model = ProfileModel
     template_name = 'coaches-list.html'
     paginate_by = 3
@@ -38,6 +40,7 @@ class CoachListView(ListView):
         return self.queryset.all()
 
 
+@login_required
 def star_coach(request, pk):
     coach = get_object_or_404(ProfileModel, pk=pk)
     user = request.user

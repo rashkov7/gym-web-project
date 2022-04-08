@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ImproperlyConfigured
 from django.db.models import QuerySet
 from django.shortcuts import get_object_or_404
@@ -6,6 +7,7 @@ from django.urls import reverse_lazy
 
 from django.views.generic import UpdateView, ListView, DetailView
 
+from gym.mixins import UserAuthorizedMixin
 from gym.profile_app.forms import ProfileForm
 from gym.profile_app.models import ProfileModel
 from gym.recipe_app.models import RecipeModel
@@ -14,11 +16,12 @@ from gym.workout_app.models import WorkoutModel
 UserModel = get_user_model()
 
 
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(UserAuthorizedMixin, UpdateView):
     template_name = 'profile/profile-update.html'
     model = ProfileModel
     success_url = reverse_lazy('index')
     form_class = ProfileForm
+    permission_required = ''
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -30,14 +33,24 @@ class UpdateProfileView(UpdateView):
         return super().form_valid(form)
 
 
-class ProfilePageView(DetailView):
+class ProfilePageView(LoginRequiredMixin, DetailView):
     template_name = 'profile/profile_details.html'
     model = ProfileModel
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        user = self.request.user
+        profile = get_object_or_404(ProfileModel, pk=self.kwargs['pk'])
 
-class MyWorkoutView(ListView):
+        if user.profilemodel == profile:
+            context['owner'] = True
+        return context
+
+
+class MyWorkoutView(UserAuthorizedMixin, ListView):
     template_name = 'profile/my_events.html'
     model = WorkoutModel
+    permission_required = ''
 
     def get_queryset(self):
         """
@@ -68,9 +81,10 @@ class MyWorkoutView(ListView):
         return queryset
 
 
-class MyRecipeView(ListView):
+class MyRecipeView(UserAuthorizedMixin, ListView):
     template_name = 'profile/my_recipes.html'
     model = RecipeModel
+    permission_required = ''
 
     def get_queryset(self):
         """

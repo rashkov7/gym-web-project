@@ -45,6 +45,5 @@ class ProfileModel(models.Model):
 
     @property
     def is_stars_by_the_user(self):
-        b = self.star_owner.filter(owner__user=self.user)
-        if b:
+        if self.star_owner.filter(owner__user=self.user):
             return True
