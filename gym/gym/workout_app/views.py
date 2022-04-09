@@ -20,6 +20,7 @@ class WorkoutListView(LoginRequiredMixin, ListView):
     model = WorkoutModel
 
 
+# View with all attendees at workout.
 class AttendeesListView(LoginRequiredMixin, ListView):
     template_name = 'workout/members-list.html'
     model = GymUser
@@ -60,6 +61,7 @@ def sign_me(request, pk):
     return redirect('workout list')
 
 
+# View: all coach's workouts that he lead
 class CoachWorkoutsListView(LoginRequiredMixin, ListView):
     template_name = 'workout/workout-list.html'
     model = WorkoutModel
@@ -94,22 +96,13 @@ class WorkoutCreateView(PermissionRequiredMixin, CreateView):
     permission_required = 'workout_app.add_workoutmodel'
 
 
+# View: workout's details with coaches who lead it
 class WorkoutDetailView(LoginRequiredMixin, DetailView):
     template_name = 'workout/workout-details.html'
     model = WorkoutModel
 
     def get_context_data(self, **kwargs):
-        """Insert the single object into the context dict."""
         context = {}
-        if self.object:
-            context['object'] = self.object
-            context_object_name = self.get_context_object_name(self.object)
-            if context_object_name:
-                context[context_object_name] = self.object
-
         context['coaches'] = UserModel.objects.filter(team_of_event=self.kwargs['pk'])
         context.update(kwargs)
-
         return super().get_context_data(**context)
-
-        # query = )

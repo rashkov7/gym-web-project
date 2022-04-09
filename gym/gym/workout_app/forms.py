@@ -1,22 +1,7 @@
 from django import forms
 
+from gym.mixins import BootstrapFormMixin
 from gym.workout_app.models import WorkoutModel
-
-
-class BootstrapFormMixin:
-    fields = {}
-
-    def _init_placeholder(self):
-        for name, field in self.fields.items():
-            if not hasattr(field.widget, 'attrs'):
-                setattr(field.widget, 'attrs', {})
-            field.widget.attrs['placeholder'] = field.label
-
-    def _init_readonly_fields(self):
-        for name, field in self.fields.items():
-            if not hasattr(field.widget, 'attrs'):
-                setattr(field.widget, 'attrs', {})
-            field.widget.attrs['readonly'] = True
 
 
 class WorkoutCreateForm(BootstrapFormMixin, forms.ModelForm):
@@ -26,4 +11,4 @@ class WorkoutCreateForm(BootstrapFormMixin, forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._init_placeholder()
+        self._init_bootstrap_placeholder()

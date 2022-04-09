@@ -6,12 +6,9 @@
         <form method="POST" action="{% url 'update profile' user.id %}" enctype="multipart/form-data">
             {% csrf_token %}
             <h1> Update your profile </h1>
-            {% for field in form %}
-                <div class="input-group">
-                    {{ field }}
-                    <label class="{{ field.name }}">{{ field.label }}</label>
-                </div>
-            {% endfor %}
+
+            {{ form }}
+
             <input type="submit" class="button-register" title="Submit">
         </form>
     </section>

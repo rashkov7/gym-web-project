@@ -8,20 +8,22 @@ from django.urls import reverse_lazy
 from django.views.generic import UpdateView, ListView, DetailView
 
 from gym.mixins import UserAuthorizedMixin
-from gym.profile_app.forms import ProfileForm
+from gym.profile_app.forms import ProfileEditForm
 from gym.profile_app.models import ProfileModel
 from gym.recipe_app.models import RecipeModel
 from gym.workout_app.models import WorkoutModel
 
 UserModel = get_user_model()
 
+""" Update profile view. We manually added user to the form"""
+
 
 class UpdateProfileView(UserAuthorizedMixin, UpdateView):
+    permission_required = 'profile_app.change_profilemodel'
     template_name = 'profile/profile-update.html'
     model = ProfileModel
+    form_class = ProfileEditForm
     success_url = reverse_lazy('index')
-    form_class = ProfileForm
-    permission_required = 'profile_app.change_profilemodel'
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -33,12 +35,16 @@ class UpdateProfileView(UserAuthorizedMixin, UpdateView):
         return super().form_valid(form)
 
 
+""" ProfilePageView. Simple view with extra content. OWNER is needed for authorization. """
+
+
 class ProfilePageView(LoginRequiredMixin, DetailView):
     template_name = 'profile/profile_details.html'
     model = ProfileModel
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
+
         user = self.request.user
         profile = get_object_or_404(ProfileModel, pk=self.kwargs['pk'])
 
@@ -47,17 +53,16 @@ class ProfilePageView(LoginRequiredMixin, DetailView):
         return context
 
 
+""" Customer, workouts View. Queryset with all his sign workouts. """
+
+
 class MyWorkoutView(UserAuthorizedMixin, ListView):
     template_name = 'profile/my_events.html'
     model = WorkoutModel
-    permission_required = ''
+    permission_required = 'profile_app.change_profilemodel'
 
     def get_queryset(self):
-        """
-        Return the list of items for this view.
-        The return value must be an iterable and may be an instance of
-        `QuerySet` in which case `QuerySet` specific behavior will be enabled.
-        """
+
         if self.queryset is not None:
             queryset = self.queryset
             if isinstance(queryset, QuerySet):
@@ -81,26 +86,23 @@ class MyWorkoutView(UserAuthorizedMixin, ListView):
         return queryset
 
 
+""" Customer - recipes View. Queryset with all his fav recipe. """
+
+
 class MyRecipeView(UserAuthorizedMixin, ListView):
     template_name = 'profile/my_recipes.html'
     model = RecipeModel
-    permission_required = ''
+    permission_required = 'profile_app.change_profilemodel'
 
     def get_queryset(self):
-        """
-        Return the list of items for this view.
-        The return value must be an iterable and may be an instance of
-        `QuerySet` in which case `QuerySet` specific behavior will be enabled.
-        """
+
         if self.queryset is not None:
             queryset = self.queryset
             if isinstance(queryset, QuerySet):
                 queryset = queryset.all()
         elif self.model is not None:
-            a = 5
             user = get_object_or_404(UserModel, pk=self.kwargs['pk'])
             queryset = self.model._default_manager.filter(favorites=user)
-            b = 5
         else:
             raise ImproperlyConfigured(
                 "%(cls)s is missing a QuerySet. Define "

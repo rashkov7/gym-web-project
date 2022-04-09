@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="comment center">
+    {% if workouts %}
+        <h1>WORKOUTS</h1>
+        {% for workout in workouts %}
+            <a href="{% url 'workout details' workout.pk %}">
+                <div class="comment center">
+                    <h2>{{ workout.title }}</h2>
+                    <h3>{{ workout.type_of_workout }}</h3>
+                    <p>{{ workout.date }} at {{ workout.hour }}</p>
+                </div>
+            </a>
+        {% endfor %}
+    {% endif %}
+
+    {% if recipes %}
+        <h1>RECIPES</h1>
+        {% for recipe in recipes %}
+            <a href="{% url 'details recipe' recipe.pk %}">
+                <div class="comment center">
+                    <h2>{{ recipe.title }}</h2>
+                    <h3>{{ recipe.author }}</h3>
+                    <p>{{ recipe.description | truncatewords:20 }}</p>
+                </div>
+            </a>
+            <br>
+        {% endfor %}
+    {% endif %}
+
+    {% if coaches %}
+        <h1>COACHES</h1>
+        {% for trener in coaches %}
+            <a href="{% url 'profile page' trener.pk %}">
+                <div class="comment center">
+                    <h2>{{ trener.full_name }}</h2>
+                    <h3>{{ trener.gender }}</h3>
+                    <p>{{ trener.description | truncatewords:20 }}</p>
+                </div>
+            </a>
+            <br>
+        {% endfor %}
+    {% endif %}
+        <br>
+
+    <p><a href="{% url 'index' %}" class="button-register center" style="width: 40px">BACK</a></p>
+    </div>
+
+
+{% endblock %}

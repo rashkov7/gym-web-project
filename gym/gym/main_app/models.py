@@ -19,3 +19,7 @@ class GymInfoModel(models.Model):
 class StarCoach(models.Model):
     owner = models.ForeignKey(ProfileModel, on_delete=models.CASCADE, related_name='star_owner')
     sender = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='star_sender')
+
+
+class SearchModel(models.Model):
+    search = models.CharField(max_length=50, verbose_name='Search')

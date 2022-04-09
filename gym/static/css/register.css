@@ -41,20 +41,12 @@ label {
     transition: 0.2s;
 }
 
-/*!*input[type=text]:focus~label, input[type=url]:focus~label,*!*/
-/*input:valid~label, input:valid~label {*/
-/*    top: -35px;*/
-/*    font-size: 14px;*/
-/*}*/
-
 
 .wallpaper i {
     width: 10px;
-    /*margin: -5px;*/
     border: none;
     background: transparent;
 }
-
 
 input:focus ~ label,
 input:valid ~ label {
@@ -67,15 +59,6 @@ textarea:valid ~ label {
     top: -35px;
     font-size: 14px;
 }
-
-/*.input-group > select {*/
-/*    !*width: 100%;*!*/
-/*    padding: 10px;*/
-/*    outline: 0;*/
-/*    border: 1px solid white;*/
-/*    background: transparent;*/
-/*    font-size: 35px;*/
-/*}*/
 
 input[type=checkbox] {
     width: 20px;

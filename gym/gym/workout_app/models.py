@@ -1,5 +1,8 @@
 from django.contrib.auth import get_user_model
+from django.core.validators import MinLengthValidator
 from django.db import models
+
+from gym.auth_app.validators import validate_string_only_alphabet
 
 UserModel = get_user_model()
 
@@ -19,7 +22,11 @@ class WorkoutModel(models.Model):
     )
     max_length = max(len(x[0]) for x in CHOICES)
 
-    title = models.CharField(max_length=30, verbose_name='Title of workout')
+    title = models.CharField(
+        max_length=30,
+        verbose_name='Title of workout',
+        validators=(validate_string_only_alphabet, MinLengthValidator(3, 'Title must contains at least 3 characters'))
+    )
     type_of_workout = models.CharField(
         max_length=max_length,
         choices=CHOICES,
@@ -27,7 +34,11 @@ class WorkoutModel(models.Model):
     )
     hour = models.CharField(max_length=10, verbose_name='Starting hour')
     date = models.DateField(verbose_name='Date', blank=True, null=True)
-    venue = models.CharField(max_length=50, verbose_name='Place')
+    venue = models.CharField(
+        max_length=50,
+        verbose_name='Place',
+        validators=(validate_string_only_alphabet, MinLengthValidator(3, 'Venue must contains at least 3 characters'))
+    )
     img = models.URLField(blank=True, null=True)
     description = models.TextField(verbose_name='Description')
 

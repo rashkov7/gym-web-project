@@ -1,33 +1,65 @@
 from datetime import date
 
+from django.contrib.auth import get_user_model
+from django.core.validators import MinLengthValidator
 from django.db import models
 
 from gym.auth_app.models import GymUser
 
+from gym.auth_app.validators import validate_string_only_alphabet
+
+UserModel = get_user_model()
+
+# TODO which is better way to do this? Model inheritance or a big data info.
+
 
 class ProfileModel(models.Model):
+    MIN_CHARS = 3
     choices = [
         ('Do not show', 'Do not show'),
         ('Male', 'Male'),
         ('Female', 'Female'),
     ]
-    DEFAULT_CHOICE = choices[2][0]
+    DEFAULT_CHOICE = choices[0][0]
 
-    length_choice = max(len(x[0]) for x in choices)
+    LENGTH_CHOICE = max(len(x[0]) for x in choices)
 
-    first_name = models.CharField(max_length=30, verbose_name='First Name')
-    last_name = models.CharField(max_length=30, verbose_name='Last Name', blank=True, null=True)
+    first_name = models.CharField(
+        max_length=30,
+        verbose_name='First Name',
+        validators=(
+            validate_string_only_alphabet,
+            MinLengthValidator(MIN_CHARS, f'Name must contains at least {MIN_CHARS} characters')
+        )
+    )
+    last_name = models.CharField(
+        max_length=30,
+        verbose_name='Last Name',
+        validators=(
+            validate_string_only_alphabet,
+            MinLengthValidator(MIN_CHARS, f'Name must contains at least {MIN_CHARS} characters')
+        )
+    )
     birth_date = models.DateField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    gender = models.CharField(choices=choices, max_length=length_choice, default=DEFAULT_CHOICE)
-    photo = models.ImageField(blank=True, null=True)
+    gender = models.CharField(
+        choices=choices,
+        max_length=LENGTH_CHOICE,
+        default=DEFAULT_CHOICE
+    )
+    photo = models.ImageField(blank=True, null=True, upload_to='images')
+
     crossfit_coach = models.BooleanField(default=False)
     yoga_coach = models.BooleanField(default=False)
     combat_coach = models.BooleanField(default=False)
     fitness_coach = models.BooleanField(default=False)
     dance_coach = models.BooleanField(default=False)
 
-    user = models.OneToOneField(GymUser, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(
+        UserModel,
+        on_delete=models.CASCADE,
+        primary_key=True
+    )
 
     @property
     def full_name(self):

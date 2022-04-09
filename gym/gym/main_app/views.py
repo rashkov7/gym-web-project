@@ -3,21 +3,37 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ImproperlyConfigured
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, TemplateView
+from django.views.generic.edit import FormMixin
 
-from gym.main_app.models import GymInfoModel, StarCoach
+from gym.main_app.models import StarCoach
 from gym.profile_app.models import ProfileModel
+from gym.recipe_app.forms import SearchForm
+from gym.recipe_app.models import RecipeModel
+from gym.workout_app.models import WorkoutModel
 
 UserModel = get_user_model()
 
 
-def index_test(request):
-    a = ProfileModel.objects.filter(user__trainer=True)
-    exist_gym_info = GymInfoModel.objects.exists()
-    if not exist_gym_info:
-        new_in = GymInfoModel.objects.create(h1='Update web site info !')
-    context = {'is_true': "Abra kadabra"}
-    return render(request, 'index.html', context)
+class LandingPage(FormMixin, TemplateView):
+    template_name = 'index.html'
+    form_class = SearchForm
+    success_url = reverse_lazy('index')
+
+
+@login_required
+def search_page(request):
+    searched = request.POST['search']
+    a = WorkoutModel.objects.filter(title__contains=searched)
+    b = RecipeModel.objects.filter(title__contains=searched)
+    c = ProfileModel.objects.filter(first_name__contains=searched).filter(user__trainer=True)
+    context = {
+        'workouts': a,
+        'recipes': b,
+        'coaches':c
+    }
+    return render(request, 'searched-list.html', context)
 
 
 class CoachListView(LoginRequiredMixin, ListView):

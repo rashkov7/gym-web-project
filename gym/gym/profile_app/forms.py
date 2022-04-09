@@ -1,23 +1,15 @@
 from django import forms
 
+from gym.mixins import BootstrapFormMixin
 from gym.profile_app.models import ProfileModel
 
 
-class ProfileForm(forms.ModelForm):
-
-    HIDDEN_INPUTS = (
-        'user', 'crossfit_coach',
-        'yoga_coach', 'combat_coach',
-        'fitness_coach', 'dance_coach'
-    )
+class ProfileEditForm(forms.ModelForm, BootstrapFormMixin):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for name, field in self.fields.items():
-            if name in self.HIDDEN_INPUTS:
-                field.widget = forms.HiddenInput()
-                field.required = False
+        self._init_bootstrap_placeholder()
 
     class Meta:
         model = ProfileModel
-        fields = '__all__'
+        fields = ('first_name', 'last_name', 'birth_date', 'gender', 'description')
