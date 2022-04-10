@@ -5,20 +5,17 @@
     <section class="wallpaper">
         <form method="POST" action="{% url 'create recipe' %}">
             {% csrf_token %}
+            <h1> Create Recipe </h1>
 
-            <h1> SignUp Corner</h1>
+            <div class = "form">
 
-            {% for field in form %}
-                <div class="small input-group">
+                {{ form.as_p }}
 
-                    {{ field }}
-                    <label class="{{ field.name }}">{{ field.label }}</label>
-
-                </div>
-            {% endfor %}
+            </div>
 
             <input type="submit" class="button-register" title="Submit">
         </form>
+
     </section>
 
 {% endblock %}

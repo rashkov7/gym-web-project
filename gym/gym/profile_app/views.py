@@ -2,38 +2,18 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ImproperlyConfigured
 from django.db.models import QuerySet
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 
-from django.views.generic import UpdateView, ListView, DetailView
+from django.views.generic import UpdateView, ListView, DetailView, DeleteView
 
 from gym.mixins import UserAuthorizedMixin
-from gym.profile_app.forms import ProfileEditForm
+from gym.profile_app.forms import ProfileEditForm, ProfilePhotoUpdate
 from gym.profile_app.models import ProfileModel
 from gym.recipe_app.models import RecipeModel
 from gym.workout_app.models import WorkoutModel
 
 UserModel = get_user_model()
-
-""" Update profile view. We manually added user to the form"""
-
-
-class UpdateProfileView(UserAuthorizedMixin, UpdateView):
-    permission_required = 'profile_app.change_profilemodel'
-    template_name = 'profile/profile-update.html'
-    model = ProfileModel
-    form_class = ProfileEditForm
-    success_url = reverse_lazy('index')
-
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        if not self.request.user.has_profile:
-            self.request.user.has_profile = True
-            self.request.user.save()
-        self.object = form.save(commit=True)
-        return super().form_valid(form)
-
 
 """ ProfilePageView. Simple view with extra content. OWNER is needed for authorization. """
 
@@ -53,13 +33,52 @@ class ProfilePageView(LoginRequiredMixin, DetailView):
         return context
 
 
+""" Update profile view. We manually added user to the form"""
+
+
+class UpdateProfileView(UserAuthorizedMixin, UpdateView):
+    permission_required = 'profile_app.change_profilemodel'
+
+    template_name = 'profile/profile-update.html'
+    model = ProfileModel
+    form_class = ProfileEditForm
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        if not self.request.user.has_profile:
+            self.request.user.has_profile = True
+            self.request.user.save()
+        self.object = form.save(commit=True)
+        return super().form_valid(form)
+
+
+class UpdateProfilePhotoView(UpdateProfileView):
+    template_name = 'profile/profile-update.html'
+    model = ProfileModel
+    form_class = ProfilePhotoUpdate
+
+    def get_success_url(self):
+        return reverse_lazy('profile page', kwargs={'pk': self.object.pk})
+
+
+class DeleteProfileView(UserAuthorizedMixin, DeleteView):
+    permission_required = 'profile_app.change_profilemodel'
+
+    model = UserModel
+    template_name = 'profile/delete-user.html'
+    success_url = reverse_lazy('index')
+
+
 """ Customer, workouts View. Queryset with all his sign workouts. """
 
 
 class MyWorkoutView(UserAuthorizedMixin, ListView):
+    permission_required = 'profile_app.change_profilemodel'
+
     template_name = 'profile/my_events.html'
     model = WorkoutModel
-    permission_required = 'profile_app.change_profilemodel'
 
     def get_queryset(self):
 
@@ -90,9 +109,10 @@ class MyWorkoutView(UserAuthorizedMixin, ListView):
 
 
 class MyRecipeView(UserAuthorizedMixin, ListView):
+    permission_required = 'profile_app.change_profilemodel'
+
     template_name = 'profile/my_recipes.html'
     model = RecipeModel
-    permission_required = 'profile_app.change_profilemodel'
 
     def get_queryset(self):
 

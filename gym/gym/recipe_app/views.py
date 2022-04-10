@@ -11,11 +11,11 @@ from gym.recipe_app.models import RecipeModel, CommentRecipeModel
 
 
 class CreateRecipe(PermissionRequiredMixin, CreateView):
+    permission_required = 'recipe_app.add_recipemodel'
+
     template_name = 'recipes/create_recipe.html'
     model = RecipeModel
     form_class = RecipeForm
-    permission_required = 'recipe_app.add_recipemodel'
-    redirect_field_name = 'redirect_to'
     success_url = reverse_lazy('index')
 
     def form_valid(self, form):
@@ -66,7 +66,7 @@ class UpdateRecipeView(PermissionRequiredMixin, UpdateView):
         return reverse_lazy('details recipe', kwargs={'pk': self.object.id})
 
 
-@permission_required('recipe_ape.delete_recipemodel')
+@permission_required('recipe_ape.add_recipemodel')
 def delete_recipe(request, pk):
     recipe = RecipeModel.objects.filter(pk=pk)
     recipe.delete()

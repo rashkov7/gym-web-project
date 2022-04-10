@@ -4,13 +4,12 @@
     <section class="wallpaper">
         <form method="POST" action="{% url 'update recipe' object.id %}">
             {% csrf_token %}
-            <h1> SignUp Corner</h1>
-            {% for field in form %}
-                <div class="small input-group">
-                    {{ field }}
-                    <label class="{{ field.name }}">{{ field.label }}</label>
-                </div>
-            {% endfor %}
+            <h1> Update Corner</h1>
+            <div class="form">
+
+                {{ form.as_p }}
+
+            </div>
             <input type="submit" class="button-register" title="Submit">
         </form>
     </section>

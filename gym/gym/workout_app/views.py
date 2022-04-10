@@ -6,7 +6,7 @@ from django.db.models import QuerySet
 from django.shortcuts import get_object_or_404, redirect
 
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
 from gym.auth_app.models import GymUser
 from gym.workout_app.forms import WorkoutCreateForm
@@ -20,12 +20,37 @@ class WorkoutListView(LoginRequiredMixin, ListView):
     model = WorkoutModel
 
 
+class WorkoutCreateView(PermissionRequiredMixin, CreateView):
+    permission_required = 'workout_app.add_workoutmodel'
+
+    template_name = 'workout/create-workout.html'
+    form_class = WorkoutCreateForm
+    success_url = reverse_lazy('workout list')
+
+
+class WorkoutUpdateView(PermissionRequiredMixin, UpdateView):
+    permission_required = 'workout_app.add_workoutmodel'
+
+    template_name = 'workout/edit-workout.html'
+    model = WorkoutModel
+    fields = ('title', 'type_of_workout', 'description', 'hour', 'date', 'venue', 'img', 'team')
+
+    def get_success_url(self):
+        return reverse_lazy('workout details', self.kwargs['pk'])
+
+
+@login_required
+def delete_workout(request, pk):
+    obj = get_object_or_404(WorkoutModel, pk=pk)
+    obj.delete()
+    return redirect('workout list')
+
+
 # View with all attendees at workout.
 class AttendeesListView(LoginRequiredMixin, ListView):
     template_name = 'workout/members-list.html'
     model = GymUser
 
-    # find all participants in this workout
     def get_queryset(self):
         if self.queryset is not None:
             queryset = self.queryset
@@ -87,13 +112,6 @@ class CoachWorkoutsListView(LoginRequiredMixin, ListView):
                 ordering = (ordering,)
             queryset = queryset.order_by(*ordering)
         return queryset
-
-
-class WorkoutCreateView(PermissionRequiredMixin, CreateView):
-    template_name = 'workout/create-workout.html'
-    form_class = WorkoutCreateForm
-    success_url = reverse_lazy('workout list')
-    permission_required = 'workout_app.add_workoutmodel'
 
 
 # View: workout's details with coaches who lead it

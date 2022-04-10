@@ -36,13 +36,13 @@
         </div>
 
         <div class="profile-img">
-            {% if profilemodel.photo %}
-                <img src="{{ profilemodel.photo }}" alt="photo img">
-                <p class="a"><i class="fa-solid fa-camera"></i></p>
+            {% if object.photo %}
+                <img src="{{ object.photo.url }}" alt="photo img">
+                <a href="{% url 'update photo profile' object.pk %}"><i class="fa-solid fa-camera"></i></a>
             {% else %}
                 <img src="https://media.istockphoto.com/vectors/unknown-person-silhouette-whith-blue-tie-vector-id521573873?k=20&m=521573873&s=612x612&w=0&h=2hHpMHSPRwIvcST3YR5PEU3zp9U8MUV6mBIZ6kN6Tmo="
                      alt="photo img">
-                <a href="#"><i class="fa-solid fa-camera"></i></a>
+                <a href="{% url 'update photo profile' object.pk %}"><i class="fa-solid fa-camera"></i></a>
             {% endif %}
         </div>
 
@@ -51,7 +51,7 @@
                 <a href="{% url 'update profile' profilemodel.pk %}" class="remove">
                     <div class="button-register small">Edit</div>
                 </a>
-                <a href="#" class="remove">
+                <a href="{% url 'delete profile' object.pk %}" class="remove">
                 <div class="button-register small">Delete</div>
             {% endif %}
             </a>

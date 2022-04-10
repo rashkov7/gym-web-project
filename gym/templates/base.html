@@ -29,7 +29,11 @@
                     <li><a href="{% url 'trainers' %}" class="navbar-btn">Coaches</a></li>
                     <li><a href="{% url 'workout list' %}" class="navbar-btn">Workouts</a></li>
                     <li><a href="{% url 'list recipe' %}" class="navbar-btn">Recipes</a></li>
-                    <li><a href="{% url 'profile page' user.id %}" class="navbar-btn">Profile</a></li>
+                    {% if user.has_profile %}
+                        <li><a href="{% url 'profile page' user.id %}" class="navbar-btn">Profile</a></li>
+                    {% else %}
+                        <li><a href="{% url 'update profile' user.id %}" class="navbar-btn">Profile</a></li>
+                    {% endif %}
                     <li><a href="{% url 'logout' %}" class="navbar-btn">Logout</a></li>
                 {% else %}
                     <li><a href="{% url 'register' %}" class="navbar-btn">Register</a></li>

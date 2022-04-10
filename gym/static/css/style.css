@@ -35,12 +35,7 @@ body {
     background: url("../images/form-wallpaper.jpg") black scroll;
     align-items: center;
     background-size: cover;
-    /*display: grid;*/
-    /*grid-template-columns: 30% 30% 40%;*/
-    /*grid-template-rows: 40px 800px 200px;*/
-    /*grid-template-areas: "header header header"*/
-    /*                    "main main main"*/
-    /*                    "footer footer footer";*/
+
 }
 
 header {
@@ -123,4 +118,18 @@ textarea::-webkit-scrollbar {
 .form-control {
     display: inline-block;
     width: 80%;
+}
+
+.form > p {
+    position: relative;
+    margin: 30px 5px;
+    text-align: left;
+}
+
+.form > p > label {
+    top: -20px;
+}
+
+p > .invisible {
+    display: none;
 }

@@ -3,16 +3,16 @@
 
 {% block content %}
     <section>
-        <h1> </h1>
+        <h1></h1>
         <h1><i>Push through the pain <span>EVERY</span> single day?</i></h1>
         <div class="center form-control">
             <form action="{% url 'create workout' %}" method="post" class="center">
                 {% csrf_token %}
-                {% for field in form %}
-                    <div>
-                        {{ field }}
-                    </div>
-                {% endfor %}
+                <div class="form">
+
+                    {{ form.as_p }}
+
+                </div>
                 <input type="submit" class="button-register" title="Submit">
             </form>
         </div>

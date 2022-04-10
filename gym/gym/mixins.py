@@ -28,7 +28,7 @@ class BootstrapFormMixin:
             if name not in self.excluded_fields:
                 if not hasattr(field.widget, 'attrs'):
                     setattr(field.widget, 'attrs', {})
-                if 'class' not in field.widget.attrs:
+                if 'class' not in field.widget.attrs and name not in self.excluded_fields:
                     field.widget.attrs['class'] = ''
                 field.widget.attrs['class'] = self.bootstrap_class
 
@@ -36,6 +36,12 @@ class BootstrapFormMixin:
         for name, field in self.fields.items():
             if name not in self.excluded_fields:
                 field.required = False
+
+    def _init_hidden_fields(self):
+        for name, field in self.fields.items():
+            if name not in self.excluded_fields:
+                field.required = False
+                field.widget.is_hidden = True
 
 
 class UserAuthorizedMixin(PermissionRequiredMixin):

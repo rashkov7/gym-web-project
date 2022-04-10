@@ -3,17 +3,19 @@
 {% block content %}
 
     <section class="wallpaper">
-        <form enctype="multipart/form-data" method="post" action="{% url 'update photo profile' object.pk %}">
+        <form method="POST" action="{% url 'delete profile' object.pk %}">
             {% csrf_token %}
-            <h1> Update your profile </h1>
+            <h1> Edit Corner </h1>
 
-            <div class="form">
+            <div class = "form">
 
                 {{ form.as_p }}
 
             </div>
+
             <input type="submit" class="button-register" title="Submit">
         </form>
+
     </section>
 
 {% endblock %}

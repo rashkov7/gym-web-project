@@ -12,7 +12,13 @@
 
                     <div class="card-title"><i class="fa-solid fa-star"></i></div>
                     <div class="card-img">
-                        <img src="{{ coach.photo }}" alt="my photo">
+                        {% if coach.photo %}
+                            <img src="{{ coach.photo.url }}" alt="my photo">
+                        {% else %}
+                               <img src="{% static 'images/generic_profile.png' %}" alt="my photo">
+                        {% endif %}
+
+
                     </div>
                     <div class="card-text">
                         <h2>
