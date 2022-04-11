@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'gym.auth_app',
-    'gym.profile_app',
-    'gym.main_app',
-    'gym.recipe_app',
-    'gym.workout_app',
+    'gym.auth_app.apps.AuthAppConfig',
+    'gym.profile_app.apps.ProfileAppConfig',
+    'gym.main_app.apps.MainAppConfig',
+    'gym.recipe_app.apps.RecipeAppConfig',
+    'gym.workout_app.apps.WorkoutAppConfig',
 ]
 
 MIDDLEWARE = [

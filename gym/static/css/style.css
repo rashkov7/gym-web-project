@@ -59,6 +59,7 @@ main {
     color: white;
     text-decoration: none;
     border: 2px solid seashell;
+    box-shadow: 5px 10px 15px rgba(19, 18, 18, 0.96)
 }
 
 
