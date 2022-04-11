@@ -6,7 +6,7 @@ from django.db import models
 
 from gym.auth_app.models import GymUser
 
-from gym.auth_app.validators import validate_string_only_alphabet
+from gym.helpers.validators import validate_string_only_alphabet
 
 UserModel = get_user_model()
 

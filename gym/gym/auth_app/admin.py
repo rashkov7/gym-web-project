@@ -5,4 +5,4 @@ from gym.auth_app.models import GymUser
 
 @admin.register(GymUser)
 class AdminGymUser(admin.ModelAdmin):
-    pass
+    list_display = ('email', 'date_joined')

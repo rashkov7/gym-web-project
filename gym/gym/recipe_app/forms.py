@@ -1,7 +1,7 @@
 from django import forms
 
 from gym.main_app.models import SearchModel
-from gym.mixins import BootstrapFormMixin
+from gym.helpers.mixins import BootstrapFormMixin
 from gym.recipe_app.models import RecipeModel, CommentRecipeModel
 
 

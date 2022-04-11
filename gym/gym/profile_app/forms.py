@@ -1,6 +1,6 @@
 from django import forms
 
-from gym.mixins import BootstrapFormMixin
+from gym.helpers.mixins import BootstrapFormMixin
 from gym.profile_app.models import ProfileModel
 
 

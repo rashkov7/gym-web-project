@@ -2,12 +2,12 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ImproperlyConfigured
 from django.db.models import QuerySet
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 
 from django.views.generic import UpdateView, ListView, DetailView, DeleteView
 
-from gym.mixins import UserAuthorizedMixin
+from gym.helpers.mixins import UserAuthorizedMixin
 from gym.profile_app.forms import ProfileEditForm, ProfilePhotoUpdate
 from gym.profile_app.models import ProfileModel
 from gym.recipe_app.models import RecipeModel

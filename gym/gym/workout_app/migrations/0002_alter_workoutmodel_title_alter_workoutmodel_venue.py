@@ -3,7 +3,7 @@
 import django.core.validators
 from django.db import migrations, models
 
-from gym.auth_app.validators import validate_string_only_alphabet
+from gym.helpers.validators import validate_string_only_alphabet
 
 
 class Migration(migrations.Migration):

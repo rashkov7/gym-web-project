@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.core.validators import MinLengthValidator, MaxValueValidator
 from django.db import models
 
-from gym.auth_app.validators import validate_string_only_alphabet
+from gym.helpers.validators import validate_string_only_alphabet
 
 UserModel = get_user_model()
 
@@ -20,7 +20,7 @@ class RecipeModel(models.Model):
         )
     )
     description = models.TextField(verbose_name='Description')
-    img = models.URLField(null=True, blank=True)
+    img = models.URLField()
     cooking_time = models.PositiveIntegerField(default=0)
     servings = models.PositiveIntegerField(
         default=0,
@@ -55,6 +55,9 @@ class RecipeModel(models.Model):
     def all_favorites(self):
         return self.favorites.count()
 
+    def __str__(self):
+        return f'{self.title}'
+
 
 class CommentRecipeModel(models.Model):
     text = models.TextField()
@@ -66,3 +69,6 @@ class CommentRecipeModel(models.Model):
     def name_owner(self):
         name = self.owner.profilemodel.full_name
         return name
+
+    def __str__(self):
+        return f'{self.owner} comment {self.recipe}'

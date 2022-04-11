@@ -6,4 +6,4 @@ from gym.workout_app.models import WorkoutModel
 
 @admin.register(WorkoutModel)
 class AdminWorkout(admin.ModelAdmin):
-    pass
+    list_display = ('title', 'type_of_workout', 'date')

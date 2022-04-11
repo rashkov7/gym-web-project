@@ -1,7 +1,7 @@
 from django import forms
 
 from gym.main_app.models import GymInfoModel
-from gym.mixins import BootstrapFormMixin
+from gym.helpers.mixins import BootstrapFormMixin
 
 
 class GymInfoForm(forms.ModelForm, BootstrapFormMixin):

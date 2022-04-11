@@ -25,3 +25,5 @@ urlpatterns = [
     path('recipe/', include('gym.recipe_app.urls')),
     path('workout/', include('gym.workout_app.urls')),
 ]
+handler404 = 'gym.main_app.views.handlers.error_404'
+handler403 = 'gym.main_app.views.handlers.error_403'

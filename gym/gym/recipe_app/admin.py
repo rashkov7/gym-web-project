@@ -1,9 +1,13 @@
 from django.contrib import admin
 
-# Register your models here.
-from gym.recipe_app.models import RecipeModel
+from gym.recipe_app.models import RecipeModel, CommentRecipeModel
 
 
 @admin.register(RecipeModel)
 class AdminRecipe(admin.ModelAdmin):
-    pass
+    list_display = ('title', 'author', 'date')
+
+
+@admin.register(CommentRecipeModel)
+class AdminRecipe(admin.ModelAdmin):
+    list_display = ('owner', 'recipe', 'date')

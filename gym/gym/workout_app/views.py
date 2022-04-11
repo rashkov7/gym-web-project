@@ -6,7 +6,7 @@ from django.db.models import QuerySet
 from django.shortcuts import get_object_or_404, redirect
 
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
 
 from gym.auth_app.models import GymUser
 from gym.workout_app.forms import WorkoutCreateForm
@@ -36,7 +36,7 @@ class WorkoutUpdateView(PermissionRequiredMixin, UpdateView):
     fields = ('title', 'type_of_workout', 'description', 'hour', 'date', 'venue', 'img', 'team')
 
     def get_success_url(self):
-        return reverse_lazy('workout details', self.kwargs['pk'])
+        return reverse_lazy('workout details', kwargs={'pk': self.object.id})
 
 
 @login_required
