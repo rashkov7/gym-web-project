@@ -11,10 +11,11 @@ def successful_registration_email(user):
     message = " Congratulations! We've become a part of our family "
     our_mail = 'somemail@gmail.com'
     to_customer = UserModel.object.get(pk=user)
-
-    send_mail(
-        subject=subject,
-        message=message,
-        from_email=our_mail,
-        recipient_list=[to_customer]
-    )
+    return None
+    #
+    # send_mail(
+    #     subject=subject,
+    #     message=message,
+    #     from_email=our_mail,
+    #     recipient_list=[to_customer]
+    # )

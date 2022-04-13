@@ -11,6 +11,6 @@ UserModel = get_user_model()
 @receiver(signals.post_save, sender=UserModel)
 def user_created(sender, instance, created, **kwargs):
     if created:
-        successful_registration_email.delay(instance.id)
+        # successful_registration_email.delay(instance.id)
         ProfileModel.objects.create(first_name='Anonymous', last_name='Anonymous', user=instance)
 
