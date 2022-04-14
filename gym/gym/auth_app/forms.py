@@ -32,5 +32,4 @@ class CreateUserForm(forms.ModelForm):
         user.set_password(self.cleaned_data.get('password1'))
         if commit:
             user.save()
-        # ProfileModel.objects.create(first_name='Anonymous', last_name='Anonymous', user=user)
         return user

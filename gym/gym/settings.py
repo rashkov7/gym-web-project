@@ -22,7 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT')
 
@@ -180,9 +179,10 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 
 # SENDING MAIL STUFF
-EMAIL_HOST = 'smtp.mail.bg'
-EMAIL_PORT = '993'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
 EMAIL_HOST_USER = os.getenv('HOST_EMAIL')
 EMAIL_HOST_PASSWORD = os.getenv('HOST_EMAIL_PASS')
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
+
