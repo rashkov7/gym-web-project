@@ -15,3 +15,5 @@ It's small web project, designed as a Sport's page. Users/Custemers could share 
   
 ## Some photos:
 <img src="https://res.cloudinary.com/dpe5acysn/image/upload/v1650194475/screenshots/pic_1_i8rmxh.jpg" alt="landing page" style="height: 300px; width:500px;"/>
+<img src="https://res.cloudinary.com/dpe5acysn/image/upload/v1650232393/screenshots/pic_2_txjcsv.jpg" alt="landing page" style="height: 300px; width:500px;"/>
+<img src="https://res.cloudinary.com/dpe5acysn/image/upload/v1650232488/screenshots/pic_3_vmhygv.jpg" alt="landing page" style="height: 300px; width:500px;"/>
