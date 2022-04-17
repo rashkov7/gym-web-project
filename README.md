@@ -1,1 +1,3 @@
-# gym-web-project
+# Project: ProGymCorner
+## Description:
+The simple website for 
