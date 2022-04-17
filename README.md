@@ -14,6 +14,19 @@ It's small web project, designed as a Sport's page. Users/Custemers could share 
  - HTML/CSS - front-end and a little bit JS.
   
 ## Some photos:
-<img src="https://res.cloudinary.com/dpe5acysn/image/upload/v1650194475/screenshots/pic_1_i8rmxh.jpg" alt="landing page" style="height: 300px; width:500px;"/>
 <img src="https://res.cloudinary.com/dpe5acysn/image/upload/v1650232393/screenshots/pic_2_txjcsv.jpg" alt="landing page" style="height: 300px; width:500px;"/>
 <img src="https://res.cloudinary.com/dpe5acysn/image/upload/v1650232488/screenshots/pic_3_vmhygv.jpg" alt="landing page" style="height: 300px; width:500px;"/>
+
+##  How to Install and Run the Project
+ - clone repository on your local machine
+ - Create virtual environments in the project foolder
+ - Configure a Python interpreter
+ - INSTALL requirements.txt wich is in the project
+ - You need to install Celery and Redis in your virtual environments. pip install celery.
+ - Run your broker server. redis-server.
+ - Next run your Django server. python manage.py runserver
+ - Next step run your Celery worker.
+ - next run your scheduler.
+
+## License 
+License is free license software. 
