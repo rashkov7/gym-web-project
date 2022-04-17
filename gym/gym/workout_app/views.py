@@ -18,6 +18,7 @@ UserModel = get_user_model()
 class WorkoutListView(LoginRequiredMixin, ListView):
     template_name = 'workout/workout-list.html'
     model = WorkoutModel
+    paginate_by = 3
 
 
 class WorkoutCreateView(PermissionRequiredMixin, CreateView):
@@ -52,21 +53,8 @@ class AttendeesListView(LoginRequiredMixin, ListView):
     model = GymUser
 
     def get_queryset(self):
-        if self.queryset is not None:
-            queryset = self.queryset
-            if isinstance(queryset, QuerySet):
-                queryset = queryset.all()
+        queryset = self.model._default_manager.filter(participants_of_event__id=self.kwargs['pk'])
 
-        elif self.model is not None:
-            queryset = self.model._default_manager.filter(participants_of_event__id=self.kwargs['pk'])
-        else:
-            raise ImproperlyConfigured(
-                "%(cls)s is missing a QuerySet. Define "
-                "%(cls)s.model, %(cls)s.queryset, or override "
-                "%(cls)s.get_queryset()." % {
-                    'cls': self.__class__.__name__
-                }
-            )
         ordering = self.get_ordering()
         if ordering:
             if isinstance(ordering, str):
@@ -92,20 +80,8 @@ class CoachWorkoutsListView(LoginRequiredMixin, ListView):
     model = WorkoutModel
 
     def get_queryset(self):
-        if self.queryset is not None:
-            queryset = self.queryset
-            if isinstance(queryset, QuerySet):
-                queryset = queryset.all()
-        elif self.model is not None:
-            queryset = self.model._default_manager.filter(team__id=self.kwargs['pk'])
-        else:
-            raise ImproperlyConfigured(
-                "%(cls)s is missing a QuerySet. Define "
-                "%(cls)s.model, %(cls)s.queryset, or override "
-                "%(cls)s.get_queryset()." % {
-                    'cls': self.__class__.__name__
-                }
-            )
+        queryset = self.model._default_manager.filter(team__id=self.kwargs['pk'])
+
         ordering = self.get_ordering()
         if ordering:
             if isinstance(ordering, str):

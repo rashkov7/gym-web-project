@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from gym.main_app.models import GymInfoModel
+
+
+@admin.register(GymInfoModel)
+class AdminSiteInfo(admin.ModelAdmin):
+    pass

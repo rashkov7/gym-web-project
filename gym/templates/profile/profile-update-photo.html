@@ -3,7 +3,7 @@
 {% block content %}
 
     <section class="wallpaper">
-        <form enctype="multipart/form-data" method="post" action="{% url 'update profile' object.pk %}">
+        <form enctype="multipart/form-data" method="post" action="{% url 'update photo profile' object.pk %}">
             {% csrf_token %}
             <h1> Update your profile </h1>
 

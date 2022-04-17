@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.core.validators import MinLengthValidator, MaxValueValidator
 from django.db import models
 
-from gym.helpers.validators import validate_string_only_alphabet
+from gym.helpers.validators import validator_name_only_alphabet_and_space
 
 UserModel = get_user_model()
 
@@ -15,7 +15,7 @@ class RecipeModel(models.Model):
         max_length=30,
         verbose_name='Title',
         validators=(
-            validate_string_only_alphabet,
+            validator_name_only_alphabet_and_space,
             MinLengthValidator(MIN_CHARS, f'Title must contains at least {MIN_CHARS} characters')
         )
     )

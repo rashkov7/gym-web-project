@@ -3,7 +3,7 @@
 import django.core.validators
 from django.db import migrations, models
 
-from gym.helpers.validators import validate_string_only_alphabet
+from gym.helpers.validators import validator_name_only_alphabet_and_space
 
 
 class Migration(migrations.Migration):
@@ -16,11 +16,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='workoutmodel',
             name='title',
-            field=models.CharField(max_length=30, validators=[validate_string_only_alphabet, django.core.validators.MinLengthValidator(3, 'Title must contains at least 3 characters')], verbose_name='Title of workout'),
+            field=models.CharField(max_length=30, validators=[validator_name_only_alphabet_and_space, django.core.validators.MinLengthValidator(3, 'Title must contains at least 3 characters')], verbose_name='Title of workout'),
         ),
         migrations.AlterField(
             model_name='workoutmodel',
             name='venue',
-            field=models.CharField(max_length=50, validators=[validate_string_only_alphabet, django.core.validators.MinLengthValidator(3, 'Venue must contains at least 3 characters')], verbose_name='Place'),
+            field=models.CharField(max_length=50, validators=[validator_name_only_alphabet_and_space, django.core.validators.MinLengthValidator(3, 'Venue must contains at least 3 characters')], verbose_name='Place'),
         ),
     ]

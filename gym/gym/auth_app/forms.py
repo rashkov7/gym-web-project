@@ -2,7 +2,6 @@ from django import forms
 from django.contrib.auth import password_validation
 
 from gym.auth_app.models import GymUser
-from gym.profile_app.models import ProfileModel
 
 
 class CreateUserForm(forms.ModelForm):

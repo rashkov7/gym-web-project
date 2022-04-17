@@ -6,11 +6,9 @@ from django.db import models
 
 from gym.auth_app.models import GymUser
 
-from gym.helpers.validators import validate_string_only_alphabet
+from gym.helpers.validators import validator_name_only_alphabet_and_space, name_first_letter_validator
 
 UserModel = get_user_model()
-
-# TODO which is better way to do this? Model inheritance or a big data info.
 
 
 class ProfileModel(models.Model):
@@ -28,17 +26,22 @@ class ProfileModel(models.Model):
         max_length=30,
         verbose_name='First Name',
         validators=(
-            validate_string_only_alphabet,
+            name_first_letter_validator,
+            validator_name_only_alphabet_and_space,
             MinLengthValidator(MIN_CHARS, f'Name must contains at least {MIN_CHARS} characters')
-        )
+        ),
+        blank=True,
+        null=True,
     )
     last_name = models.CharField(
         max_length=30,
         verbose_name='Last Name',
         validators=(
-            validate_string_only_alphabet,
+            validator_name_only_alphabet_and_space,
             MinLengthValidator(MIN_CHARS, f'Name must contains at least {MIN_CHARS} characters')
-        )
+        ),
+        blank=True,
+        null=True,
     )
     birth_date = models.DateField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
@@ -61,7 +64,6 @@ class ProfileModel(models.Model):
         primary_key=True
     )
 
-
     @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
@@ -80,3 +82,7 @@ class ProfileModel(models.Model):
     def is_stars_by_the_user(self):
         if self.star_owner.filter(owner__user=self.user):
             return True
+
+
+class TestModel(models.Model):
+    test = models.CharField(max_length=10)

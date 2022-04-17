@@ -25,14 +25,21 @@ class LandingPage(FormMixin, TemplateView):
 @login_required
 def search_page(request):
     searched = request.POST['search']
-    a = WorkoutModel.objects.filter(title__contains=searched)
-    b = RecipeModel.objects.filter(title__contains=searched)
-    c = ProfileModel.objects.filter(first_name__contains=searched).filter(user__trainer=True)
     context = {
-        'workouts': a,
-        'recipes': b,
-        'coaches':c
+        'workouts': WorkoutModel.objects.filter(title__contains=searched),
+        'recipes': RecipeModel.objects.filter(title__contains=searched),
+        'coaches': ProfileModel.objects.filter(first_name__contains=searched).filter(user__trainer=True)
     }
+    if searched in 'workouts':
+        context['workouts'] = WorkoutModel.objects.all()
+    elif searched in 'recipes':
+        context['recipes'] = RecipeModel.objects.all()
+    elif searched in 'coaches':
+        context['coaches'] = ProfileModel.objects.all().filter(user__trainer=True)
+    find = {True for key,value in context.items() if value}
+    if not find:
+        context = {'no_matches': f'Sorry, there is no results with "{searched}".'}
+
     return render(request, 'searched-list.html', context)
 
 
@@ -42,18 +49,8 @@ class CoachListView(LoginRequiredMixin, ListView):
     paginate_by = 3
 
     def get_queryset(self):
-        if self.queryset is None:
-            if self.model:
-                return self.model._default_manager.filter(user__trainer=True)
-            else:
-                raise ImproperlyConfigured(
-                    "%(cls)s is missing a QuerySet. Define "
-                    "%(cls)s.model, %(cls)s.queryset, or override "
-                    "%(cls)s.get_queryset()." % {
-                        'cls': self.__class__.__name__
-                    }
-                )
-        return self.queryset.all()
+        qry = super(CoachListView, self).get_queryset().filter(user__trainer=True)
+        return qry
 
 
 @login_required

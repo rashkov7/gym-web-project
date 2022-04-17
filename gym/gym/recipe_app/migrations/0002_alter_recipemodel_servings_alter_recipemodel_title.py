@@ -3,7 +3,7 @@
 import django.core.validators
 from django.db import migrations, models
 
-from gym.helpers.validators import validate_string_only_alphabet
+from gym.helpers.validators import validator_name_only_alphabet_and_space
 
 
 class Migration(migrations.Migration):
@@ -21,6 +21,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='recipemodel',
             name='title',
-            field=models.CharField(max_length=30, validators=[validate_string_only_alphabet, django.core.validators.MinLengthValidator(3, 'Title must contains at least 3 characters')], verbose_name='Title'),
+            field=models.CharField(max_length=30, validators=[validator_name_only_alphabet_and_space, django.core.validators.MinLengthValidator(3, 'Title must contains at least 3 characters')], verbose_name='Title'),
         ),
     ]
