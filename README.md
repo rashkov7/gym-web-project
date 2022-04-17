@@ -20,8 +20,17 @@ It's small web project, designed as a Sport's page. Users/Custemers could share 
 ##  How to Install and Run the Project
  - clone repository on your local machine
  - Create virtual environments in the project foolder
+ - ```python
+     Install Package. First, install python3-venv package by using the following command.
+     Create a Directory. $ mkdir djangoenv. ...
+     Create Virtual Environment. $ python3 -m venv djangoenv. ...
+     Activate Virtual Environment.
+ ```
  - Configure a Python interpreter
  - INSTALL requirements.txt wich is in the project
+ ```python
+    pip install -r requierements.txt
+ ```
  - You need to install Celery and Redis in your virtual environments. pip install celery.
  - Run your broker server. redis-server.
  - Next run your Django server. python manage.py runserver
