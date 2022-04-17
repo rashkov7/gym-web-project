@@ -1,7 +1,7 @@
 # Project: ProGymCorner
 ## Description:
 It's small web project, designed as a Sport's page. Users/Custemers could share their experience, recipes and could find and sign for workouts also. It's available anly for registred users. The site has admins and different levels of perrmissions. Each registred user has a profile and favorites colections with recipes. 
-###Used technologies.
+### Used technologies.
  - Code language is Python3,
  - IDE - Pycharm
  - Python Framework Django
@@ -11,5 +11,7 @@ It's small web project, designed as a Sport's page. Users/Custemers could share 
  - SQL DB with PostgreSQL database(on production) and sqldb(on DEBUG)
  - Docker - docker containers are used for Posgres, Redis, 
  - OOP/SOLID Principles were strictly observe.
-###Some photos:
-<img src="https://res.cloudinary.com/dpe5acysn/image/upload/v1650194475/screenshots/pic_1_i8rmxh.jpg" alt="landing page" style="height: 300px; width:400px;"/>
+ - HTML/CSS - front-end and a little bit JS.
+  
+## Some photos:
+<img src="https://res.cloudinary.com/dpe5acysn/image/upload/v1650194475/screenshots/pic_1_i8rmxh.jpg" alt="landing page" style="height: 300px; width:500px;"/>
