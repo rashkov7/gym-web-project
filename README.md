@@ -3,6 +3,7 @@
 ## Description:
 It's small web project, designed as a Sport's page. Users/Custemers could share their experience, recipes and could find and sign for workouts also. It's available anly for registred users. The site has admins and different levels of perrmissions. Each registred user has a profile and favorites colections with recipes. 
 ### Used technologies.
+> 
  - Code language is Python3,
  - IDE - Pycharm
  - Python Framework Django
@@ -38,4 +39,4 @@ It's small web project, designed as a Sport's page. Users/Custemers could share 
  - next run your scheduler.
 
 ## License 
-License is free license software. 
+MIT License is free license software. 
