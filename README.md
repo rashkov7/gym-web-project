@@ -31,7 +31,6 @@ It's small web project, designed as a Sport's page. Users/Custemers could share 
  ```python
     pip install -r requierements.txt
  ```
- - You need to install Celery and Redis in your virtual environments. pip install celery.
  - Run your broker server. redis-server.
  - Next run your Django server. python manage.py runserver
  - Next step run your Celery worker.
