@@ -1,4 +1,4 @@
-# Project: ProGymCorner - Copy of https://github.com/rashkov7/gym-web-project
+# Project: ProGymCorner
 ## [-> Open the web project here <-](https://gym-corner.herokuapp.com/)
 ## Description:
 It's small web project, designed as a Sport's page. Users/Custemers could share their experience, recipes and could find and sign for workouts also. It's available anly for registred users. The site has admins and different levels of perrmissions. Each registred user has a profile and favorites colections with recipes. 
