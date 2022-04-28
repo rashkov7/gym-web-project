@@ -9,7 +9,9 @@ class GymUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, verbose_name='Email')
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
+
     has_profile = models.BooleanField(default=False)
+
     trainer = models.BooleanField(default=False)
 
     use_in_migrations = True

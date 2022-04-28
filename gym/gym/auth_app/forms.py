@@ -30,5 +30,6 @@ class CreateUserForm(forms.ModelForm):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data.get('password1'))
         if commit:
+            user.is_active = False
             user.save()
         return user

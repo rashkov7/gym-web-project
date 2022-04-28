@@ -13,12 +13,11 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
-#TODO: Change debug configuration after tests.
 
 
 SECRET_KEY = os.getenv('SECRET_KEY')
@@ -43,6 +42,7 @@ INSTALLED_APPS = [
     'gym.recipe_app.apps.RecipeAppConfig',
     'gym.workout_app.apps.WorkoutAppConfig',
 ]
+
 if DEBUG:
     MIDDLEWARE = [
 
@@ -186,4 +186,3 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.getenv('HOST_EMAIL')
 EMAIL_HOST_PASSWORD = os.getenv('HOST_EMAIL_PASS')
-
